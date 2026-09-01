@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-surface": "#303030", "on-surface": "#1b1c1c", "on-primary-fixed": "#002114", "on-tertiary-fixed-variant": "#474744", "surface-dim": "#dcd9d9", "on-error": "#ffffff", "tertiary-fixed": "#e4e2de", "secondary": "#904d00", "error-container": "#ffdad6", "on-tertiary": "#ffffff", "primary-fixed": "#c1ecd4", "primary-container": "#1b4332", "surface-container-high": "#eae7e7", "on-primary-container": "#86af99", "primary": "#012d1d", "on-error-container": "#93000a", "on-surface-variant": "#414844", "on-secondary": "#ffffff", "on-secondary-fixed": "#2f1500", "outline": "#717973", "on-tertiary-fixed": "#1b1c1a", "surface": "#fcf9f8", "surface-container-low": "#f6f3f2", "tertiary-fixed-dim": "#c8c6c3", "secondary-fixed-dim": "#ffb77d", "surface-container-lowest": "#ffffff", "inverse-primary": "#a5d0b9", "outline-variant": "#c1c8c2", "on-secondary-container": "#663500", "tertiary-container": "#3c3c3a", "secondary-fixed": "#ffdcc3", "error": "#ba1a1a", "surface-variant": "#e4e2e1", "tertiary": "#262624", "on-secondary-fixed-variant": "#6e3900", "secondary-container": "#fe932c", "surface-container-highest": "#e4e2e1", "background": "#fcf9f8", "on-background": "#1b1c1c", "surface-bright": "#fcf9f8", "surface-tint": "#3f6653", "inverse-on-surface": "#f3f0ef", "primary-fixed-dim": "#a5d0b9", "surface-container": "#f0eded", "on-primary-fixed-variant": "#274e3d", "on-primary": "#ffffff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin-desktop": "40px", "stack-lg": "48px", "stack-sm": "12px", "gutter": "16px", "base": "8px", "touch-target-min": "48px", "stack-md": "24px", "margin-mobile": "20px" }, "fontFamily": { "headline-xl": ["Rubik"], "label-bold": ["Rubik"], "body-lg": ["Rubik"], "headline-lg": ["Rubik"], "headline-md": ["Rubik"], "headline-lg-mobile": ["Rubik"], "body-md": ["Rubik"] }, "fontSize": { "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<script src="translations.js"></script></head><body class="bg-surface font-body-md text-on-surface min-h-screen flex flex-col pt-safe pb-safe"><main class="flex-1 w-full relative"><div class="flex flex-col w-full h-full min-h-[calc(100vh-env(safe-area-inset-top)-env(safe-area-inset-bottom))] bg-surface px-margin-mobile pt-stack-md pb-stack-lg relative overflow-hidden">
+<!-- Background Texture/Pattern -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(circle at center, #012d1d 1px, transparent 1px); background-size: 24px 24px;"></div>
+<header class="mb-stack-lg relative z-10 flex flex-col items-center text-center mt-stack-md">
+<!-- Logo / Icon -->
+<div class="w-16 h-16 rounded-2xl bg-surface-container-high flex items-center justify-center mb-stack-md shadow-sm">
+<span class="material-symbols-outlined text-primary text-[32px] font-bold">translate</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-stack-sm tracking-tight" data-i18n="appLanguageQuestion">
+            App kis language mein use karna chahenge?
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant" data-i18n="languageDesc">
+            Choose your preferred language to get started. You can change this later.
+        </p>
+</header>
+<main class="flex-1 flex flex-col gap-gutter relative z-10"><label class="relative cursor-pointer group">
+<input checked="" class="peer sr-only" name="language_selection" type="radio" value="hinglish">
+<div class="w-full bg-surface-container-low rounded-xl p-stack-md flex items-center gap-stack-md transition-all duration-300 shadow-sm peer-checked:bg-primary-container peer-checked:shadow-md ring-0 peer-checked:ring-2 peer-checked:ring-primary active:scale-[0.98]">
+<div class="w-12 h-12 rounded-full bg-surface flex items-center justify-center shadow-sm flex-shrink-0 text-[24px]">
+                    💬
+                </div>
+<div class="flex-1">
+<h2 class="font-headline-md text-headline-md text-on-surface peer-checked:text-on-primary-container mb-1 group-focus-within:text-on-primary-container" data-i18n="hindiEnglish">
+                        Hindi + English
+                    </h2>
+<p class="font-body-md text-body-md text-on-surface-variant peer-checked:text-on-primary-container/80 group-focus-within:text-on-primary-container/80" data-i18n="hindiEnglishSub">
+                        Hindi + English mein
+                    </p>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-outline-variant flex items-center justify-center transition-colors duration-300 peer-checked:border-primary peer-checked:bg-primary">
+<span class="material-symbols-outlined text-on-primary text-[20px] opacity-0 peer-checked:opacity-100 transition-opacity duration-300" style="font-variation-settings: 'FILL' 1, 'wght' 600;">check</span>
+</div>
+</div>
+</label>
+<!-- Hindi Option -->
+<label class="relative cursor-pointer group">
+<input class="peer sr-only" name="language_selection" type="radio" value="hindi">
+<div class="w-full bg-surface-container-low rounded-xl p-stack-md flex items-center gap-stack-md transition-all duration-300 shadow-sm peer-checked:bg-primary-container peer-checked:shadow-md ring-0 peer-checked:ring-2 peer-checked:ring-primary active:scale-[0.98]">
+<div class="w-12 h-12 rounded-full bg-surface flex items-center justify-center shadow-sm flex-shrink-0 text-[24px]">
+                    🇮🇳
+                </div>
+<div class="flex-1">
+<h2 class="font-headline-md text-headline-md text-on-surface peer-checked:text-on-primary-container mb-1 group-focus-within:text-on-primary-container">
+                        हिंदी
+                    </h2>
+<p class="font-body-md text-body-md text-on-surface-variant peer-checked:text-on-primary-container/80 group-focus-within:text-on-primary-container/80">
+                        सरल हिंदी में
+                    </p>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-outline-variant flex items-center justify-center transition-colors duration-300 peer-checked:border-primary peer-checked:bg-primary">
+<span class="material-symbols-outlined text-on-primary text-[20px] opacity-0 peer-checked:opacity-100 transition-opacity duration-300" style="font-variation-settings: 'FILL' 1, 'wght' 600;">check</span>
+</div>
+</div>
+</label>
+<!-- English Option -->
+<label class="relative cursor-pointer group">
+<input class="peer sr-only" name="language_selection" type="radio" value="english">
+<div class="w-full bg-surface-container-low rounded-xl p-stack-md flex items-center gap-stack-md transition-all duration-300 shadow-sm peer-checked:bg-primary-container peer-checked:shadow-md ring-0 peer-checked:ring-2 peer-checked:ring-primary active:scale-[0.98]">
+<div class="w-12 h-12 rounded-full bg-surface flex items-center justify-center shadow-sm flex-shrink-0 text-[24px]">
+                    🇬🇧
+                </div>
+<div class="flex-1">
+<h2 class="font-headline-md text-headline-md text-on-surface peer-checked:text-on-primary-container mb-1 group-focus-within:text-on-primary-container">
+                        English
+                    </h2>
+<p class="font-body-md text-body-md text-on-surface-variant peer-checked:text-on-primary-container/80 group-focus-within:text-on-primary-container/80">
+                        Simple English
+                    </p>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-outline-variant flex items-center justify-center transition-colors duration-300 peer-checked:border-primary peer-checked:bg-primary">
+<span class="material-symbols-outlined text-on-primary text-[20px] opacity-0 peer-checked:opacity-100 transition-opacity duration-300" style="font-variation-settings: 'FILL' 1, 'wght' 600;">check</span>
+</div>
+</div>
+</label>
+</main>
+<footer class="mt-stack-lg relative z-10 w-full pt-stack-sm">
+<button class="w-full bg-primary text-on-primary font-label-bold text-label-bold h-[56px] rounded-full flex items-center justify-center gap-2 shadow-md hover:bg-primary/90 active:bg-primary-container active:text-on-primary-container transition-colors duration-200" id="continueBtn">
+<span data-i18n="aageBadhein">Aage badhein</span>
+            <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</footer>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        applyTranslations();
+
+        const radioInputs = document.querySelectorAll('input[name="language_selection"]');
+        const continueBtn = document.getElementById('continueBtn');
+
+        updateButtonState();
+
+        radioInputs.forEach(input => {
+            input.addEventListener('change', updateButtonState);
+        });
+
+        function updateButtonState() {
+            let isSelected = false;
+            radioInputs.forEach(input => {
+                if (input.checked) isSelected = true;
+            });
+
+            if (isSelected) {
+                continueBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            } else {
+                 continueBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        continueBtn.addEventListener('click', (e) => {
+            if(continueBtn.classList.contains('cursor-not-allowed')) return;
+
+            const btn = e.currentTarget;
+            btn.style.transform = 'scale(0.96)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 100);
+
+            const selected = document.querySelector('input[name="language_selection"]:checked');
+            const langValue = selected ? selected.value : 'hinglish';
+            setSavedLanguage(langValue);
+
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML = `<span class="material-symbols-outlined animate-spin">progress_activity</span> Setup shuru ho raha hai...`;
+
+            setTimeout(() => {
+                window.location.href = 'stitch_home.html';
+            }, 1500);
+        });
+    });
+</script></main>
+
+</body></html>

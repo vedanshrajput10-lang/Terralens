@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TerraLens</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div>
+        <p class="eyebrow">TERRALENS</p>
+        <h1>Namaste, Rajesh ji 👋</h1>
+        <p class="subtitle">Aaj aapke khet mein kya ho raha hai?</p>
+      </div>
+      <button class="language" type="button">🌐 Hinglish</button>
+    </header>
+
+    <section class="attention card">
+      <div class="icon">⚠️</div>
+      <div>
+        <p class="label">Aaj ka dhyan</p>
+        <h2>Field 02 needs attention</h2>
+        <p>Aage nutrient problem ho sakti hai.</p>
+        <button class="primary" type="button">Samjhein →</button>
+      </div>
+    </section>
+
+    <section class="actions">
+      <button class="action card" type="button" id="scanBtn">
+        <span>📸</span>
+        <strong>Fasal ki photo lein</strong>
+        <small>Crop scan</small>
+      </button>
+
+      <button class="action card" type="button" id="voiceBtn">
+        <span>🎙️</span>
+        <strong>Bolkar bataayein</strong>
+        <small>Talk to TerraLens</small>
+      </button>
+    </section>
+
+    <section class="card weather">
+      <div>
+        <p class="label">Weather</p>
+        <h2>28°C</h2>
+        <p>Rain likely tomorrow</p>
+      </div>
+      <div class="weather-icon">🌦️</div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <h2>Farm Health</h2>
+        <span>Today</span>
+      </div>
+
+      <div class="health-grid">
+        <div class="card mini"><span>🌱</span><strong>Crop Health</strong><small>Good</small></div>
+        <div class="card mini"><span>💧</span><strong>Water</strong><small>Needs attention</small></div>
+        <div class="card mini"><span>⚠️</span><strong>Future Risk</strong><small>Medium</small></div>
+      </div>
+    </section>
+
+    <nav class="bottom-nav">
+      <button class="active" type="button">⌂<span>Home</span></button>
+      <button type="button">🌾<span>Fields</span></button>
+      <button class="scan" type="button" id="navScanBtn">📸<span>Scan</span></button>
+      <button type="button">👤<span>Profile</span></button>
+    </nav>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

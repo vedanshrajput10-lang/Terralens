@@ -1,0 +1,142 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-variant": "#e4e2e1", "secondary": "#904d00", "on-primary-fixed": "#002114", "surface-bright": "#fcf9f8", "inverse-on-surface": "#f3f0ef", "on-tertiary-fixed-variant": "#474744", "tertiary-fixed": "#e4e2de", "tertiary-fixed-dim": "#c8c6c3", "outline-variant": "#c1c8c2", "surface-container-lowest": "#ffffff", "surface-tint": "#3f6653", "surface-container-highest": "#e4e2e1", "on-tertiary-container": "#a7a6a3", "on-primary-container": "#86af99", "primary-fixed-dim": "#a5d0b9", "on-secondary": "#ffffff", "on-tertiary": "#ffffff", "primary-fixed": "#c1ecd4", "on-tertiary-fixed": "#1b1c1a", "surface-container-low": "#f6f3f2", "primary": "#012d1d", "on-background": "#1b1c1c", "on-primary-fixed-variant": "#274e3d", "secondary-fixed-dim": "#ffb77d", "surface-container-high": "#eae7e7", "on-error": "#ffffff", "tertiary-container": "#3c3c3a", "inverse-surface": "#303030", "tertiary": "#262624", "surface": "#fcf9f8", "inverse-primary": "#a5d0b9", "primary-container": "#1b4332", "on-secondary-fixed": "#2f1500", "outline": "#717973", "secondary-container": "#fe932c", "background": "#fcf9f8", "on-error-container": "#93000a", "on-secondary-fixed-variant": "#6e3900", "surface-container": "#f0eded", "secondary-fixed": "#ffdcc3", "surface-dim": "#dcd9d9", "on-secondary-container": "#663500", "on-surface": "#1b1c1c", "on-surface-variant": "#414844", "on-primary": "#ffffff", "error-container": "#ffdad6", "error": "#ba1a1a" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin-mobile": "20px", "stack-md": "24px", "stack-sm": "12px", "stack-lg": "48px", "base": "8px", "touch-target-min": "48px", "margin-desktop": "40px", "gutter": "16px" }, "fontFamily": { "headline-lg-mobile": ["Rubik"], "label-bold": ["Rubik"], "headline-xl": ["Rubik"], "headline-md": ["Rubik"], "body-lg": ["Rubik"], "headline-lg": ["Rubik"], "body-md": ["Rubik"] }, "fontSize": { "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }], "label-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }], "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-surface font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin-mobile flex items-center gap-stack-sm"><button class="w-12 h-12 flex items-center justify-center text-on-surface-variant" onclick="history.back()"><span class="material-symbols-outlined">arrow_back</span></button><h1 class="font-headline-md text-headline-md text-primary truncate">Prediction</h1></div></header><main class="relative pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full bg-surface pb-stack-lg animate-[fadeIn_0.3s_ease-out]">
+<!-- Header Area with TTS -->
+<div class="px-margin-mobile pt-stack-md flex justify-between items-start">
+<div class="flex flex-col gap-base">
+<span class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-wider">AI Estimated Risk</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Aane wale risk</h2>
+</div>
+<button class="h-[48px] px-gutter bg-surface-container rounded-full flex items-center justify-center gap-base text-primary hover:bg-surface-container-high transition-colors active:scale-95 touch-manipulation">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+<span class="font-label-bold text-label-bold">Sunayein</span>
+</button>
+</div>
+<!-- Risk Indicator Card -->
+<div class="mx-margin-mobile mt-stack-md bg-white rounded-xl p-stack-md border-[2px] border-secondary-container relative overflow-hidden shadow-[0_4px_24px_-8px_rgba(254,147,44,0.15)]">
+<!-- Decorative background elements -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary-container/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/3"></div>
+<div class="absolute bottom-0 left-0 w-24 h-24 bg-secondary-container/5 rounded-full blur-xl translate-y-1/2 -translate-x-1/2"></div>
+<div class="relative z-10 flex flex-col items-center text-center gap-gutter">
+<div class="w-16 h-16 rounded-full bg-secondary-container/20 flex items-center justify-center border-2 border-secondary-container/30">
+<span class="material-symbols-outlined text-secondary-container text-[32px]">warning</span>
+</div>
+<div class="flex flex-col gap-base items-center">
+<span class="inline-block px-gutter py-base bg-secondary-container text-on-secondary-container font-label-bold text-label-bold rounded-full tracking-wide">
+          MEDIUM RISK
+        </span>
+<p class="font-headline-md text-headline-md text-on-surface">Aage nutrient problem ho sakti hai.</p>
+</div>
+</div>
+</div>
+<!-- Timeline Progression -->
+<div class="px-margin-mobile mt-stack-lg">
+<h3 class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-wider mb-gutter">Risk Timeline</h3>
+<div class="bg-surface-container-low p-gutter rounded-lg border border-outline-variant/30 flex items-center justify-between relative">
+<!-- Connecting Line -->
+<div class="absolute left-[10%] right-[10%] top-1/2 -translate-y-1/2 h-[2px] bg-gradient-to-r from-primary-fixed via-secondary-container to-error opacity-50 z-0"></div>
+<!-- Nodes -->
+<div class="flex flex-col items-center gap-base relative z-10">
+<div class="w-4 h-4 rounded-full bg-primary border-2 border-surface"></div>
+<span class="font-body-md text-[12px] text-on-surface-variant">Today</span>
+</div>
+<div class="flex flex-col items-center gap-base relative z-10">
+<div class="w-5 h-5 rounded-full bg-secondary-container border-2 border-surface flex items-center justify-center shadow-sm">
+<div class="w-1.5 h-1.5 rounded-full bg-surface"></div>
+</div>
+<span class="font-label-bold text-[14px] text-on-surface font-semibold">Next Season</span>
+</div>
+<div class="flex flex-col items-center gap-base relative z-10">
+<div class="w-6 h-6 rounded-full bg-error border-2 border-surface flex items-center justify-center animate-pulse shadow-md">
+<span class="material-symbols-outlined text-surface text-[14px]">priority_high</span>
+</div>
+<span class="font-body-md text-[12px] text-on-surface-variant text-center w-16 leading-tight">2 Seasons</span>
+</div>
+</div>
+</div>
+<!-- Evidence Section -->
+<div class="px-margin-mobile mt-stack-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-gutter">TerraLens ko aisa kyun lag raha hai?</h3>
+<div class="flex flex-col gap-stack-sm">
+<div class="bg-white p-gutter rounded-lg border border-outline-variant/50 flex gap-gutter items-start">
+<div class="w-10 h-10 rounded-full bg-surface-container flex shrink-0 items-center justify-center text-[20px]">🌱</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-bold text-label-bold text-on-surface">Same Crop Pattern</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Rice has been planted repeatedly.</span>
+</div>
+</div>
+<div class="bg-white p-gutter rounded-lg border border-outline-variant/50 flex gap-gutter items-start">
+<div class="w-10 h-10 rounded-full bg-surface-container flex shrink-0 items-center justify-center text-[20px]">💧</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-bold text-label-bold text-on-surface">Irrigation Pattern</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Recent irrigation pattern noticed.</span>
+</div>
+</div>
+<div class="bg-white p-gutter rounded-lg border border-outline-variant/50 flex gap-gutter items-start">
+<div class="w-10 h-10 rounded-full bg-error-container flex shrink-0 items-center justify-center text-[20px]">🧪</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-bold text-label-bold text-on-surface">Soil Trend</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Soil health has slightly declined.</span>
+</div>
+</div>
+<div class="bg-white p-gutter rounded-lg border border-outline-variant/50 flex gap-gutter items-start">
+<div class="w-10 h-10 rounded-full bg-surface-container flex shrink-0 items-center justify-center text-[20px]">🌦</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-bold text-label-bold text-on-surface">Weather Pattern</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Recent weather conditions may contribute.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Preventive Actions Section -->
+<div class="px-margin-mobile mt-stack-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-gutter">Abhi kya karein?</h3>
+<div class="bg-surface-container-low rounded-xl p-stack-sm flex flex-col gap-stack-sm border border-outline-variant/30">
+<div class="flex items-center gap-gutter">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-label-bold shrink-0">1</div>
+<span class="font-body-md text-body-md text-on-surface flex-1">Soil test karwaane par consider karein</span>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-primary bg-white shadow-sm border border-outline-variant/20 active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">arrow_forward</span></button>
+</div>
+<hr class="border-t border-outline-variant/20 w-full"/>
+<div class="flex items-center gap-gutter">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-label-bold shrink-0">2</div>
+<span class="font-body-md text-body-md text-on-surface flex-1">Crop rotation ke baare mein sochein</span>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-primary bg-white shadow-sm border border-outline-variant/20 active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">arrow_forward</span></button>
+</div>
+<hr class="border-t border-outline-variant/20 w-full"/>
+<div class="flex items-center gap-gutter">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-label-bold shrink-0">3</div>
+<span class="font-body-md text-body-md text-on-surface flex-1">Fertilizer plan verify karein</span>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-primary bg-white shadow-sm border border-outline-variant/20 active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">arrow_forward</span></button>
+</div>
+<hr class="border-t border-outline-variant/20 w-full"/>
+<div class="flex items-center gap-gutter">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-label-bold shrink-0">4</div>
+<span class="font-body-md text-body-md text-on-surface flex-1">Field ko monitor karte rahein</span>
+</div>
+</div>
+</div>
+<!-- Sticky Bottom Actions -->
+<div class="fixed bottom-0 left-0 w-full p-margin-mobile bg-surface/95 backdrop-blur-md border-t border-outline-variant/30 flex flex-col gap-stack-sm z-40 pb-safe">
+<button class="w-full min-h-[56px] bg-primary text-on-primary rounded-lg font-label-bold text-label-bold flex items-center justify-center gap-base shadow-sm active:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined">support_agent</span>
+      Expert se poochein
+    </button>
+<button class="w-full min-h-[56px] bg-transparent border-2 border-primary text-primary rounded-lg font-label-bold text-label-bold flex items-center justify-center gap-base active:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined">bookmark_add</span>
+      Track This Risk
+    </button>
+</div>
+<!-- Spacing for fixed footer -->
+<div class="h-32 w-full"></div>
+</div>
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style></main></body></html>

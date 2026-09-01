@@ -1,0 +1,140 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary": "#012d1d", "on-primary": "#ffffff", "surface": "#fcf9f8", "on-surface": "#1b1c1c", "on-surface-variant": "#414844", "surface-container-low": "#f6f3f2", "surface-container": "#f0eded", "outline-variant": "#c1c8c2", "error": "#ba1a1a" } } } };</script><style>
+    body { min-height: max(884px, 100dvh); }
+  </style>
+</head><body class="bg-surface font-sans text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl pt-safe shadow-sm"><div class="h-16 px-5 flex items-center gap-3"><button onclick="history.back()" class="w-12 h-12 flex items-center justify-center text-on-surface-variant"><span class="material-symbols-outlined">arrow_back</span></button><h1 class="text-xl font-bold text-primary">Naya Khet Jodein</h1></div></header>
+
+<main class="pt-20 pb-32 px-5 max-w-lg mx-auto">
+<form id="addFieldForm" class="flex flex-col gap-5">
+
+  <div>
+    <label class="block text-sm font-semibold text-on-surface-variant mb-1">Khet ki Photo</label>
+    <input type="file" id="photo" accept="image/*" class="w-full h-14 px-4 rounded-xl bg-surface-container-low border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary"/>
+    <img id="photoPreview" class="mt-2 w-full h-40 object-cover rounded-xl hidden"/>
+  </div>
+
+  <div>
+    <label class="block text-sm font-semibold text-on-surface-variant mb-1">Field Name *</label>
+    <input type="text" id="name" required placeholder="e.g. Field 05" class="w-full h-14 px-4 rounded-xl bg-surface-container-low border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary"/>
+  </div>
+
+  <div class="grid grid-cols-2 gap-3">
+    <div>
+      <label class="block text-sm font-semibold text-on-surface-variant mb-1">Village</label>
+      <input type="text" id="village" placeholder="Village" class="w-full h-14 px-4 rounded-xl bg-surface-container-low border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary"/>
+    </div>
+    <div>
+      <label class="block text-sm font-semibold text-on-surface-variant mb-1">District</label>
+      <input type="text" id="district" placeholder="District" class="w-full h-14 px-4 rounded-xl bg-surface-container-low border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary"/>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-2 gap-3">
+    <div>
+      <label class="block text-sm font-semibold text-on-surface-variant mb-1">Latitude</label>
+      <input type="number" step="any" id="latitude" placeholder="26.85" class="w-full h-14 px-4 rounded-xl bg-surface-container-low border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary"/>
+    </div>
+    <div>
+      <label class="block text-sm font-semibold text-on-surface-variant mb-1">Longitude</label>
+      <input type="number" step="any" id="longitude" placeholder="80.95" class="w-full h-14 px-4 rounded-xl bg-surface-container-low border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary"/>
+    </div>
+  </div>
+
+  <div>
+    <label class="block text-sm font-semibold text-on-surface-variant mb-1">Area (acres) *</label>
+    <input type="number" step="any" id="area" required placeholder="e.g. 2.5" class="w-full h-14 px-4 rounded-xl bg-surface-container-low border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary"/>
+  </div>
+
+  <div>
+    <label class="block text-sm font-semibold text-on-surface-variant mb-1">Crop *</label>
+    <input type="text" id="crop" required placeholder="e.g. Rice, Wheat, Cotton" class="w-full h-14 px-4 rounded-xl bg-surface-container-low border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary"/>
+  </div>
+
+  <div>
+    <label class="block text-sm font-semibold text-on-surface-variant mb-1">Season *</label>
+    <select id="season" required class="w-full h-14 px-4 rounded-xl bg-surface-container-low border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary">
+      <option value="">Select season</option>
+      <option value="Kharif">Kharif</option>
+      <option value="Rabi">Rabi</option>
+      <option value="Zaid">Zaid</option>
+    </select>
+  </div>
+
+  <p id="errorMsg" class="text-error text-sm hidden"></p>
+
+  <button type="submit" id="submitBtn" class="w-full h-14 mt-2 bg-primary text-on-primary rounded-full font-semibold shadow-md active:scale-95 transition-transform">
+    Khet Jodein
+  </button>
+
+</form>
+</main>
+
+<script>
+const API_BASE = "http://127.0.0.1:8000";
+
+document.getElementById("photo").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  const preview = document.getElementById("photoPreview");
+  if (file) {
+    preview.src = URL.createObjectURL(file);
+    preview.classList.remove("hidden");
+  }
+});
+
+document.getElementById("addFieldForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const errorMsg = document.getElementById("errorMsg");
+  const submitBtn = document.getElementById("submitBtn");
+  errorMsg.classList.add("hidden");
+
+  const payload = {
+    name: document.getElementById("name").value,
+    location: {
+      latitude: parseFloat(document.getElementById("latitude").value) || null,
+      longitude: parseFloat(document.getElementById("longitude").value) || null,
+      village: document.getElementById("village").value || null,
+      district: document.getElementById("district").value || null
+    },
+    area: parseFloat(document.getElementById("area").value),
+    crop: document.getElementById("crop").value,
+    season: document.getElementById("season").value
+  };
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Jod raha hai...";
+
+  try {
+    const res = await fetch(`${API_BASE}/fields`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) {
+      throw new Error("Server error");
+    }
+
+    const newField = await res.json();
+
+    const photoFile = document.getElementById("photo").files[0];
+    if (photoFile) {
+      const formData = new FormData();
+      formData.append("file", photoFile);
+      await fetch(`${API_BASE}/fields/${newField.id}/photo`, {
+        method: "POST",
+        body: formData
+      });
+    }
+
+    window.location.href = "my_fields.html";
+  } catch (err) {
+    errorMsg.textContent = "Khet add nahi ho paya. Backend chal raha hai check karein.";
+    errorMsg.classList.remove("hidden");
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Khet Jodein";
+    console.error(err);
+  }
+});
+</script>
+</body></html>
