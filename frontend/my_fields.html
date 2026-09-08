@@ -4,28 +4,52 @@
       min-height: max(884px, 100dvh);
     }
   </style>
-</head><body class="bg-surface font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 px-margin-mobile flex items-center justify-between"><div class="flex items-center gap-base"><img alt="TerraLens" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WOoYmuqeZmigjsKMgxW4vdEbEXO_19rFERys_FlzVC861YT2dBHgIhtuAwK4yPO8SbbvCnNS90bVURfKDiFm64rpbjHex_nVJI9tG6QnqMw-oODXf72Oy35ZClrxwlPNs8z5n8HEIle2zbhoam2kkrkGNGMb3-G9KvSPgFNF0zZmnTsvvo99vWmOCDDdB3BiBKajnYmcO9rNw6jlS2Iit3XuloEURIJwJR6PEyW-Kr_2chmLIuj4c9RyE"/><span class="font-headline-md text-headline-md text-primary">TerraLens</span></div><div class="flex items-center gap-stack-sm"><button class="flex items-center gap-1 px-3 h-touch-target-min rounded-full bg-surface-container-low text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">language</span><span class="font-label-bold text-label-bold">Hinglish</span></button><img alt="Profile" class="w-10 h-10 rounded-full border-2 border-outline-variant object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1W3O477--ovh1PquIlSnJlqbkz36ojaoTq5hh0pLkvcqid2XnKBA2QWJySPv0127eStlAKdwc1zqPBxuFODeAhGJgE7iGmyXRmF3-ltZWo_vwvlsdZxPUZBMB6xqBVF-ivDAGLC81FCRfGTlZezpfpxSA6Qo7eEKYpgRYwBzR24dFiUqDHcQQD3GgEJqwlslFtmBWEJUyKb-JMEU7Iu-VE3FlP0DUHFr5RPQCqUx5JW2jI8md6L8mfhuwoU"/></div></div></header><main class="relative pt-20 bg-surface min-h-screen"><div class="flex flex-col w-full h-full pb-32">
+<script src="translations.js"></script></head><body class="bg-surface font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 px-margin-mobile flex items-center justify-between"><div class="flex items-center gap-base"><img alt="TerraLens" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WOoYmuqeZmigjsKMgxW4vdEbEXO_19rFERys_FlzVC861YT2dBHgIhtuAwK4yPO8SbbvCnNS90bVURfKDiFm64rpbjHex_nVJI9tG6QnqMw-oODXf72Oy35ZClrxwlPNs8z5n8HEIle2zbhoam2kkrkGNGMb3-G9KvSPgFNF0zZmnTsvvo99vWmOCDDdB3BiBKajnYmcO9rNw6jlS2Iit3XuloEURIJwJR6PEyW-Kr_2chmLIuj4c9RyE"/><span class="font-headline-md text-headline-md text-primary">TerraLens</span></div><div class="flex items-center gap-stack-sm"><div class="relative"><button id="langBtn" onclick="toggleLangMenu()" class="flex items-center gap-1 px-3 h-touch-target-min rounded-full bg-surface-container-low text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">language</span><span class="font-label-bold text-label-bold" id="langBtnLabel">Hinglish</span></button><div id="langMenu" class="hidden absolute right-0 mt-2 w-44 bg-surface rounded-xl shadow-lg border border-outline-variant/30 overflow-hidden z-50"><button onclick="switchLang('hinglish')" class="w-full text-left px-4 py-3 hover:bg-surface-container-low font-body-md text-body-md">Hindi + English</button><button onclick="switchLang('hindi')" class="w-full text-left px-4 py-3 hover:bg-surface-container-low font-body-md text-body-md">हिंदी</button><button onclick="switchLang('english')" class="w-full text-left px-4 py-3 hover:bg-surface-container-low font-body-md text-body-md">English</button></div></div></div></div></header><main class="relative pt-20 bg-surface min-h-screen"><div class="flex flex-col w-full h-full pb-32">
 <div class="px-margin-mobile pt-stack-md pb-stack-lg">
-<h1 class="font-headline-xl text-headline-xl text-on-surface mb-2">Mere Khet</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant">Har field ko track karein.</p>
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-2" data-i18n="mereKhet">Mere Khet</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant" data-i18n="harFieldTrack">Har field ko track karein.</p>
 </div>
 
 <div id="fieldsContainer" class="flex flex-col px-margin-mobile gap-stack-md">
-<p class="text-on-surface-variant">Loading fields...</p>
+<p class="text-on-surface-variant" data-i18n="loading">Loading fields...</p>
 </div>
 
 <div class="fixed bottom-[88px] left-0 w-full px-margin-mobile pointer-events-none">
 <div class="flex justify-center max-w-[1280px] mx-auto pointer-events-auto">
 <a href="add_field.html" class="bg-primary text-on-primary h-14 px-8 rounded-full font-label-bold text-label-bold flex items-center justify-center gap-2 shadow-xl hover:bg-primary/90 transition-colors">
 <span class="material-symbols-outlined text-[24px]">add</span>
-            Naya khet jodein
+            <span data-i18n="nayaKhetJodein">Naya khet jodein</span>
          </a>
 </div>
 </div>
-</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-1px_8px_rgba(0,0,0,0.04)]" data-active-classes="text-primary"><div class="flex items-center justify-around h-20 px-4"><a class="flex flex-col items-center justify-center w-14 text-on-surface-variant" data-path="home" href="stitch_home.html"><span class="material-symbols-outlined">home</span><span class="text-[10px] font-label-bold uppercase mt-1">Home</span></a><a aria-current="page" class="flex flex-col items-center justify-center w-14 text-primary" data-path="my-fields" href="my_fields.html"><span class="material-symbols-outlined">potted_plant</span><span class="text-[10px] font-label-bold uppercase mt-1">Fields</span></a><a class="flex items-center justify-center w-16 h-16 rounded-full bg-primary text-on-primary -mt-8 shadow-lg" data-path="scan" href="#"><span class="material-symbols-outlined text-[32px]">center_focus_strong</span></a><a class="flex flex-col items-center justify-center w-14 text-on-surface-variant" data-path="profile" href="#"><span class="material-symbols-outlined">person</span><span class="text-[10px] font-label-bold uppercase mt-1">Profile</span></a></div></nav>
+</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center justify-center gap-stack-lg h-20 px-4"><a class="flex flex-col items-center justify-center w-16 text-on-surface-variant" href="stitch_home.html"><span class="material-symbols-outlined">home</span><span class="text-[10px] font-label-bold uppercase mt-1" data-i18n="home">Home</span></a><a aria-current="page" class="flex flex-col items-center justify-center w-16 text-primary" href="my_fields.html"><span class="material-symbols-outlined">potted_plant</span><span class="text-[10px] font-label-bold uppercase mt-1" data-i18n="fields">Fields</span></a></div></nav>
 
 <script>
 const API_BASE = "http://127.0.0.1:8000";
+
+function toggleLangMenu() {
+  document.getElementById("langMenu").classList.toggle("hidden");
+}
+
+document.addEventListener("click", (e) => {
+  const menu = document.getElementById("langMenu");
+  const btn = document.getElementById("langBtn");
+  if (menu && !menu.classList.contains("hidden") && !menu.contains(e.target) && !btn.contains(e.target)) {
+    menu.classList.add("hidden");
+  }
+});
+
+function switchLang(lang) {
+  setSavedLanguage(lang);
+  applyTranslations();
+  updateLangBtnLabel();
+  document.getElementById("langMenu").classList.add("hidden");
+}
+
+function updateLangBtnLabel() {
+  const labels = { hinglish: "Hinglish", hindi: "हिंदी", english: "English" };
+  document.getElementById("langBtnLabel").textContent = labels[getSavedLanguage()] || "Hinglish";
+}
 
 async function loadFields() {
   const container = document.getElementById("fieldsContainer");
@@ -34,7 +58,7 @@ async function loadFields() {
     const fields = await res.json();
 
     if (fields.length === 0) {
-      container.innerHTML = `<p class="text-on-surface-variant">Koi field nahi mila. Naya khet jodein!</p>`;
+      container.innerHTML = `<p class="text-on-surface-variant">${t("khetNahiMila")}</p>`;
       return;
     }
 
@@ -82,6 +106,8 @@ async function loadFields() {
   }
 }
 
+applyTranslations();
+updateLangBtnLabel();
 loadFields();
 </script>
 </body></html>

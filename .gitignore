@@ -3,6 +3,6 @@ venv2/
 __pycache__/
 *.pyc
 .env
-uploads/*
-!uploads/.gitkeep
+backend/uploads/*
+!backend/uploads/.gitkeep
 .DS_Store

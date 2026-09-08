@@ -4,107 +4,115 @@
       min-height: max(884px, 100dvh);
     }
   </style>
-<script src="translations.js"></script></head><body class="bg-surface font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 px-margin-mobile flex items-center justify-between"><div class="flex items-center gap-base"><img alt="TerraLens" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WOoYmuqeZmigjsKMgxW4vdEbEXO_19rFERys_FlzVC861YT2dBHgIhtuAwK4yPO8SbbvCnNS90bVURfKDiFm64rpbjHex_nVJI9tG6QnqMw-oODXf72Oy35ZClrxwlPNs8z5n8HEIle2zbhoam2kkrkGNGMb3-G9KvSPgFNF0zZmnTsvvo99vWmOCDDdB3BiBKajnYmcO9rNw6jlS2Iit3XuloEURIJwJR6PEyW-Kr_2chmLIuj4c9RyE"/><span class="font-headline-md text-headline-md text-primary">TerraLens</span></div><div class="flex items-center gap-stack-sm"><button class="flex items-center gap-1 px-3 h-touch-target-min rounded-full bg-surface-container-low text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">language</span><span class="font-label-bold text-label-bold">Hinglish</span></button><img alt="Profile" class="w-10 h-10 rounded-full border-2 border-outline-variant object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1W3O477--ovh1PquIlSnJlqbkz36ojaoTq5hh0pLkvcqid2XnKBA2QWJySPv0127eStlAKdwc1zqPBxuFODeAhGJgE7iGmyXRmF3-ltZWo_vwvlsdZxPUZBMB6xqBVF-ivDAGLC81FCRfGTlZezpfpxSA6Qo7eEKYpgRYwBzR24dFiUqDHcQQD3GgEJqwlslFtmBWEJUyKb-JMEU7Iu-VE3FlP0DUHFr5RPQCqUx5JW2jI8md6L8mfhuwoU"/></div></div></header><main class="relative pt-20 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<script src="translations.js"></script></head><body class="bg-surface font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 px-margin-mobile flex items-center justify-between"><div class="flex items-center gap-base"><img alt="TerraLens" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WOoYmuqeZmigjsKMgxW4vdEbEXO_19rFERys_FlzVC861YT2dBHgIhtuAwK4yPO8SbbvCnNS90bVURfKDiFm64rpbjHex_nVJI9tG6QnqMw-oODXf72Oy35ZClrxwlPNs8z5n8HEIle2zbhoam2kkrkGNGMb3-G9KvSPgFNF0zZmnTsvvo99vWmOCDDdB3BiBKajnYmcO9rNw6jlS2Iit3XuloEURIJwJR6PEyW-Kr_2chmLIuj4c9RyE"/><span class="font-headline-md text-headline-md text-primary">TerraLens</span></div><div class="flex items-center gap-stack-sm"><div class="relative"><button id="langBtn" onclick="toggleLangMenu()" class="flex items-center gap-1 px-3 h-touch-target-min rounded-full bg-surface-container-low text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">language</span><span class="font-label-bold text-label-bold" id="langBtnLabel">Hinglish</span></button><div id="langMenu" class="hidden absolute right-0 mt-2 w-44 bg-surface rounded-xl shadow-lg border border-outline-variant/30 overflow-hidden z-50"><button onclick="switchLang('hinglish')" class="w-full text-left px-4 py-3 hover:bg-surface-container-low font-body-md text-body-md">Hindi + English</button><button onclick="switchLang('hindi')" class="w-full text-left px-4 py-3 hover:bg-surface-container-low font-body-md text-body-md">हिंदी</button><button onclick="switchLang('english')" class="w-full text-left px-4 py-3 hover:bg-surface-container-low font-body-md text-body-md">English</button></div></div></div></div></header><main class="relative pt-20 bg-surface min-h-screen"><div class="flex flex-col w-full pb-stack-lg">
 <!-- Header Section -->
 <div class="px-margin-mobile py-stack-md">
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface" data-i18n="namaste">Namaste Rajesh ji 👋</h1>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface" id="greeting">Namaste 👋</h1>
 <p class="font-body-lg text-body-lg text-on-surface-variant mt-2" data-i18n="todayQuestion">Aaj aapke khet mein kya ho raha hai?</p>
 <div class="mt-4 inline-flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full shadow-sm">
 <span class="material-symbols-outlined text-[18px] text-primary" style="font-variation-settings: 'FILL' 1;">landscape</span>
 <span class="font-label-bold text-label-bold text-on-surface" id="fieldsSummary">Loading...</span>
 </div>
 </div>
-<!-- Today's Attention Section -->
-<div class="px-margin-mobile mb-stack-md">
-<h2 class="font-headline-md text-headline-md text-on-surface mb-stack-sm" data-i18n="aajKaDhyan">Aaj ka dhyan</h2>
-<div class="bg-error-container text-on-error-container p-5 rounded-2xl shadow-sm flex flex-col gap-4">
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-[32px] text-error" style="font-variation-settings: 'FILL' 1;">warning</span>
-<div>
-<h3 class="font-headline-md text-headline-md">Field 02 needs attention</h3>
-<p class="font-body-md text-body-md mt-1 opacity-90">Aage nutrient problem ho sakti hai.</p>
-</div>
-</div>
-<a href="field_detail.html" class="self-end bg-inverse-surface text-inverse-on-surface px-5 py-2.5 rounded-xl font-label-bold text-label-bold shadow-md flex items-center gap-2 active:scale-[0.95] transition-transform">
-<span data-i18n="samjhein">Samjhein</span> <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
-</a>
-</div>
-</div>
-<!-- Primary Actions -->
+<!-- Primary Action -->
 <div class="px-margin-mobile flex flex-col gap-stack-sm mb-stack-md">
-<button class="w-full min-h-[64px] bg-primary text-on-primary rounded-2xl flex items-center justify-center gap-3 shadow-md active:scale-[0.98] transition-transform">
-<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
-<span class="font-headline-md text-headline-md" data-i18n="fasalPhoto">Fasal ki photo lein</span>
-</button>
-<button class="w-full min-h-[64px] bg-secondary-container text-on-secondary-container rounded-2xl flex items-center justify-center gap-3 shadow-sm active:scale-[0.98] transition-transform">
-<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">mic</span>
-<span class="font-headline-md text-headline-md" data-i18n="bolkarBataayein">Bolkar bataayein</span>
-</button>
-<a href="my_fields.html" class="w-full min-h-[64px] bg-surface-container-highest text-on-surface rounded-2xl flex items-center justify-center gap-3 shadow-sm active:scale-[0.98] transition-transform">
+<a href="my_fields.html" class="w-full min-h-[64px] bg-primary text-on-primary rounded-2xl flex items-center justify-center gap-3 shadow-md active:scale-[0.98] transition-transform">
 <span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">grass</span>
 <span class="font-headline-md text-headline-md" data-i18n="mereKhet">Mere khet</span>
 </a>
 </div>
-<!-- Weather Summary Strip (Smaller) -->
-<div class="mx-margin-mobile mb-stack-md px-4 py-3 bg-surface-container-high text-on-surface rounded-xl flex items-center justify-between shadow-sm">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-[24px] text-secondary-fixed-dim" style="font-variation-settings: 'FILL' 1;">partly_cloudy_day</span>
-<div class="flex items-center gap-2">
-<span class="font-label-bold text-label-bold">31°C</span>
-<span class="text-on-surface-variant">•</span>
-<span class="font-body-sm text-[14px] text-on-surface-variant">Humidity 45% • Rain 10%</span>
-</div>
-</div>
-</div>
-<!-- Farm Health Section -->
+<!-- Recent Diary Activity -->
 <div class="px-margin-mobile pb-stack-lg">
-<h2 class="font-headline-md text-headline-md text-on-surface mb-stack-sm" data-i18n="farmHealth">Farm Health</h2>
-<div class="grid grid-cols-2 gap-stack-sm">
-<!-- Crop Health -->
-<div class="col-span-1 bg-primary-container text-on-primary-container p-5 rounded-2xl shadow-sm flex flex-col justify-between min-h-[140px]">
-<span class="material-symbols-outlined text-[32px] mb-4" style="font-variation-settings: 'FILL' 1;">eco</span>
-<div>
-<p class="font-body-md text-body-md opacity-90 mb-1" data-i18n="cropHealth">Crop Health</p>
-<p class="font-headline-md text-headline-md">Good</p>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-stack-sm" data-i18n="recentActivity">Haal ki Diary Updates</h2>
+<div id="recentActivityContainer" class="flex flex-col gap-stack-sm">
+<p class="font-body-md text-body-md text-on-surface-variant" data-i18n="loading">Loading...</p>
 </div>
-</div>
-<!-- Water Status -->
-<div class="col-span-1 bg-secondary-container text-on-secondary-container p-5 rounded-2xl shadow-sm flex flex-col justify-between min-h-[140px]">
-<span class="material-symbols-outlined text-[32px] mb-4" style="font-variation-settings: 'FILL' 1;">water_drop</span>
-<div>
-<p class="font-body-md text-body-md opacity-90 mb-1" data-i18n="water">Water</p>
-<p class="font-headline-md text-headline-md leading-tight">Needs Attention</p>
-</div>
-</div>
-<!-- Weather Prediction -->
-<div class="col-span-2 bg-surface-container-high text-on-surface p-5 rounded-2xl shadow-sm flex items-center gap-4">
-<div class="bg-surface p-3 rounded-2xl shadow-sm text-primary flex-shrink-0">
-<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">rainy</span>
-</div>
-<div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-1" data-i18n="weatherForecast">Weather Forecast</p>
-<p class="font-headline-md text-headline-md">Rain likely tomorrow</p>
-</div>
-</div>
-<!-- Future Risk -->
-<div class="col-span-2 bg-error-container text-on-error-container p-5 rounded-2xl shadow-sm flex items-center justify-between">
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-[36px]" style="font-variation-settings: 'FILL' 1;">warning</span>
-<div>
-<p class="font-body-md text-body-md opacity-90 mb-1" data-i18n="futureRisk">Future Risk</p>
-<p class="font-headline-md text-headline-md">Medium</p>
-</div>
-</div>
-<a href="field_detail.html" class="bg-inverse-surface text-inverse-on-surface px-5 py-3 rounded-xl font-label-bold text-label-bold shadow-md active:scale-[0.95] transition-transform inline-block">
-<span data-i18n="samjhein">Samjhein</span>
-</a>
-</div>
-</div>
-</div>
-</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-1px_8px_rgba(0,0,0,0.04)]" data-active-classes="text-primary"><div class="flex items-center justify-around h-20 px-4"><a aria-current="page" class="flex flex-col items-center justify-center w-14 text-primary" data-path="home" href="stitch_home.html"><span class="material-symbols-outlined">home</span><span class="text-[10px] font-label-bold uppercase mt-1" data-i18n="home">Home</span></a><a class="flex flex-col items-center justify-center w-14 text-on-surface-variant" data-path="my-fields" href="my_fields.html"><span class="material-symbols-outlined">potted_plant</span><span class="text-[10px] font-label-bold uppercase mt-1" data-i18n="fields">Fields</span></a><a class="flex items-center justify-center w-16 h-16 rounded-full bg-primary text-on-primary -mt-8 shadow-lg" data-path="scan" href="#"><span class="material-symbols-outlined text-[32px]">center_focus_strong</span></a><a class="flex flex-col items-center justify-center w-14 text-on-surface-variant" data-path="profile" href="#"><span class="material-symbols-outlined">person</span><span class="text-[10px] font-label-bold uppercase mt-1" data-i18n="profile">Profile</span></a></div></nav>
+</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center justify-center gap-stack-lg h-20 px-4"><a aria-current="page" class="flex flex-col items-center justify-center w-16 text-primary" href="stitch_home.html"><span class="material-symbols-outlined">home</span><span class="text-[10px] font-label-bold uppercase mt-1" data-i18n="home">Home</span></a><a class="flex flex-col items-center justify-center w-16 text-on-surface-variant" href="my_fields.html"><span class="material-symbols-outlined">potted_plant</span><span class="text-[10px] font-label-bold uppercase mt-1" data-i18n="fields">Fields</span></a></div></nav>
 
 <script>
 const API_BASE = "http://127.0.0.1:8000";
+
+function toggleLangMenu() {
+  document.getElementById("langMenu").classList.toggle("hidden");
+}
+
+document.addEventListener("click", (e) => {
+  const menu = document.getElementById("langMenu");
+  const btn = document.getElementById("langBtn");
+  if (menu && !menu.classList.contains("hidden") && !menu.contains(e.target) && !btn.contains(e.target)) {
+    menu.classList.add("hidden");
+  }
+});
+
+function switchLang(lang) {
+  setSavedLanguage(lang);
+  applyTranslations();
+  updateLangBtnLabel();
+  renderGreeting();
+  loadRecentActivity();
+  document.getElementById("langMenu").classList.add("hidden");
+}
+
+function updateLangBtnLabel() {
+  const labels = { hinglish: "Hinglish", hindi: "हिंदी", english: "English" };
+  document.getElementById("langBtnLabel").textContent = labels[getSavedLanguage()] || "Hinglish";
+}
+
+function renderGreeting() {
+  const name = getSavedName();
+  const el = document.getElementById("greeting");
+  el.textContent = name
+    ? `${t("namasteGreeting")} ${name}${t("nameSuffix")} 👋`
+    : `${t("namasteGreeting")} 👋`;
+}
+
+async function loadUserName() {
+  // Try backend first (source of truth once /user endpoint exists), fall back to localStorage
+  try {
+    const res = await fetch(`${API_BASE}/user`);
+    if (res.ok) {
+      const user = await res.json();
+      if (user && user.name) {
+        setSavedName(user.name);
+      }
+    }
+  } catch (err) {
+    // backend not ready yet — localStorage value (saved during language select) is used instead
+  }
+  renderGreeting();
+}
+
+async function loadRecentActivity() {
+  const container = document.getElementById("recentActivityContainer");
+  try {
+    const res = await fetch(`${API_BASE}/updates/recent?limit=3`);
+    if (!res.ok) throw new Error("Failed");
+    const updates = await res.json();
+
+    if (!updates || updates.length === 0) {
+      container.innerHTML = `<p class="font-body-md text-body-md text-on-surface-variant">${t("noRecentActivity")}</p>`;
+      return;
+    }
+
+    container.innerHTML = updates.map(u => {
+      const dateStr = new Date(u.created_at).toLocaleDateString("en-IN", { day: "numeric", month: "short" });
+      const weatherTag = u.weather_temp != null ? ` • 🌦 ${Math.round(u.weather_temp)}°C` : "";
+      return `
+        <a href="field_detail.html?id=${u.field_id}" class="flex items-center gap-3 bg-surface-container-high rounded-xl p-3 shadow-sm active:scale-[0.98] transition-transform">
+          <img src="${u.photo_url}" class="w-14 h-14 rounded-lg object-cover flex-shrink-0"/>
+          <div class="flex-1 min-w-0">
+            <p class="font-label-bold text-label-bold text-on-surface truncate">${u.field_name || ""}</p>
+            <p class="text-xs text-on-surface-variant">📅 ${dateStr}${weatherTag}</p>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px]">chevron_right</span>
+        </a>
+      `;
+    }).join("");
+  } catch (err) {
+    container.innerHTML = `<p class="font-body-md text-body-md text-on-surface-variant">${t("noRecentActivity")}</p>`;
+    console.error(err);
+  }
+}
 
 async function loadFieldsSummary() {
   const el = document.getElementById("fieldsSummary");
@@ -112,7 +120,7 @@ async function loadFieldsSummary() {
     const res = await fetch(`${API_BASE}/fields`);
     const fields = await res.json();
     const totalAcres = fields.reduce((sum, f) => sum + (f.area || 0), 0);
-    el.textContent = `${fields.length} ${t("fields")} • ${totalAcres.toFixed(1)} ${t("area").includes("(") ? "" : ""}Acres`;
+    el.textContent = `${fields.length} ${t("fields")} • ${totalAcres.toFixed(1)} Acres`;
   } catch (err) {
     el.textContent = "Fields load nahi hue";
     console.error(err);
@@ -120,6 +128,9 @@ async function loadFieldsSummary() {
 }
 
 applyTranslations();
+updateLangBtnLabel();
+loadUserName();
 loadFieldsSummary();
+loadRecentActivity();
 </script>
 </body></html>

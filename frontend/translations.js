@@ -1,20 +1,19 @@
 const TRANSLATIONS = {
   hinglish: {
-    namaste: "Namaste Rajesh ji 👋",
+    namasteGreeting: "Namaste",
+    nameSuffix: " ji",
+    appAboutTitle: "TerraLens se kya kar sakte hain?",
+    appAboutFeature1: "🌾 Apne saare khet ek jagah manage karein",
+    appAboutFeature2: "📸 Khet ki Diary — time-time pe photo aur note daalein",
+    appAboutFeature3: "🌦 Har update ke saath us din ka real weather",
+    appAboutFeature4: "🗣 Apni bhasha mein — Hindi, English ya Hindi+English",
+
+    yourName: "Aapka Naam",
+    namePlaceholder: "apna naam likhein",
     todayQuestion: "Aaj aapke khet mein kya ho raha hai?",
-    aajKaDhyan: "Aaj ka dhyan",
-    samjhein: "Samjhein",
-    fasalPhoto: "Fasal ki photo lein",
-    bolkarBataayein: "Bolkar bataayein",
     mereKhet: "Mere khet",
-    farmHealth: "Farm Health",
-    cropHealth: "Crop Health",
-    water: "Water",
-    weatherForecast: "Weather Forecast",
-    futureRisk: "Future Risk",
     home: "Home",
     fields: "Fields",
-    profile: "Profile",
 
     harFieldTrack: "Har field ko track karein.",
     health: "Health",
@@ -38,11 +37,20 @@ const TRANSLATIONS = {
     jodRahaHai: "Jod raha hai...",
 
     fieldDetail: "Field Detail",
-    soilType: "Soil Type",
-    irrigation: "Irrigation",
-    sowingDate: "Sowing Date",
-    notSet: "Not set",
     koiPhotoNahi: "Koi photo nahi",
+    khetKiDiary: "Khet ki Diary",
+    nayaUpdateBtn: "Naya Update",
+    nayaUpdateHeading: "Naya Update Jodein",
+    photoLabel: "Photo",
+    noteLabel: "Note (optional)",
+    notePlaceholder: "jaise: paani diya, patte peele lag rahe hain...",
+    updateJodeinBtn: "Update Jodein",
+    photoZaroori: "Photo zaroori hai.",
+    updateNahiPaya: "Update add nahi ho paya. Backend check karein.",
+    diaryEmpty: "Abhi tak koi update nahi. Pehla update jodein!",
+    diaryLoadFail: "Diary load nahi ho payi.",
+    recentActivity: "Haal ki Diary Updates",
+    noRecentActivity: "Abhi tak koi diary update nahi hai. Kisi khet mein pehla update jodein!",
 
     appLanguageQuestion: "App kis language mein use karna chahenge?",
     languageDesc: "Choose your preferred language to get started. You can change this later.",
@@ -56,21 +64,20 @@ const TRANSLATIONS = {
   },
 
   hindi: {
-    namaste: "नमस्ते राजेश जी 👋",
+    namasteGreeting: "नमस्ते",
+    nameSuffix: " जी",
+    appAboutTitle: "TerraLens से क्या कर सकते हैं?",
+    appAboutFeature1: "🌾 अपने सारे खेत एक जगह मैनेज करें",
+    appAboutFeature2: "📸 खेत की डायरी — समय-समय पर फोटो और नोट डालें",
+    appAboutFeature3: "🌦 हर अपडेट के साथ उस दिन का असली मौसम",
+    appAboutFeature4: "🗣 अपनी भाषा में — हिंदी, अंग्रेज़ी या हिंदी+अंग्रेज़ी",
+
+    yourName: "आपका नाम",
+    namePlaceholder: "अपना नाम लिखें",
     todayQuestion: "आज आपके खेत में क्या हो रहा है?",
-    aajKaDhyan: "आज का ध्यान",
-    samjhein: "समझें",
-    fasalPhoto: "फसल की फोटो लें",
-    bolkarBataayein: "बोलकर बताएं",
     mereKhet: "मेरे खेत",
-    farmHealth: "फार्म स्वास्थ्य",
-    cropHealth: "फसल स्वास्थ्य",
-    water: "पानी",
-    weatherForecast: "मौसम पूर्वानुमान",
-    futureRisk: "भविष्य का जोखिम",
     home: "होम",
     fields: "खेत",
-    profile: "प्रोफ़ाइल",
 
     harFieldTrack: "हर खेत को ट्रैक करें।",
     health: "स्वास्थ्य",
@@ -94,11 +101,20 @@ const TRANSLATIONS = {
     jodRahaHai: "जोड़ा जा रहा है...",
 
     fieldDetail: "खेत का विवरण",
-    soilType: "मिट्टी का प्रकार",
-    irrigation: "सिंचाई",
-    sowingDate: "बुवाई की तारीख",
-    notSet: "सेट नहीं है",
     koiPhotoNahi: "कोई फोटो नहीं",
+    khetKiDiary: "खेत की डायरी",
+    nayaUpdateBtn: "नया अपडेट",
+    nayaUpdateHeading: "नया अपडेट जोड़ें",
+    photoLabel: "फोटो",
+    noteLabel: "नोट (वैकल्पिक)",
+    notePlaceholder: "जैसे: पानी दिया, पत्ते पीले लग रहे हैं...",
+    updateJodeinBtn: "अपडेट जोड़ें",
+    photoZaroori: "फोटो ज़रूरी है।",
+    updateNahiPaya: "अपडेट जोड़ा नहीं जा सका। बैकएंड चेक करें।",
+    diaryEmpty: "अभी तक कोई अपडेट नहीं। पहला अपडेट जोड़ें!",
+    diaryLoadFail: "डायरी लोड नहीं हो पाई।",
+    recentActivity: "हाल की डायरी अपडेट्स",
+    noRecentActivity: "अभी तक कोई डायरी अपडेट नहीं है। किसी खेत में पहला अपडेट जोड़ें!",
 
     appLanguageQuestion: "ऐप किस भाषा में उपयोग करना चाहेंगे?",
     languageDesc: "शुरू करने के लिए अपनी पसंदीदा भाषा चुनें। आप इसे बाद में बदल सकते हैं।",
@@ -112,21 +128,20 @@ const TRANSLATIONS = {
   },
 
   english: {
-    namaste: "Hello Rajesh 👋",
+    namasteGreeting: "Hello",
+    nameSuffix: "",
+    appAboutTitle: "What can you do with TerraLens?",
+    appAboutFeature1: "🌾 Manage all your fields in one place",
+    appAboutFeature2: "📸 Field Diary — add photos and notes over time",
+    appAboutFeature3: "🌦 Real weather attached to every update",
+    appAboutFeature4: "🗣 In your own language — Hindi, English, or both",
+
+    yourName: "Your Name",
+    namePlaceholder: "enter your name",
     todayQuestion: "What's happening in your fields today?",
-    aajKaDhyan: "Today's attention",
-    samjhein: "Understand",
-    fasalPhoto: "Take crop photo",
-    bolkarBataayein: "Speak to report",
     mereKhet: "My Fields",
-    farmHealth: "Farm Health",
-    cropHealth: "Crop Health",
-    water: "Water",
-    weatherForecast: "Weather Forecast",
-    futureRisk: "Future Risk",
     home: "Home",
     fields: "Fields",
-    profile: "Profile",
 
     harFieldTrack: "Track every field.",
     health: "Health",
@@ -150,11 +165,20 @@ const TRANSLATIONS = {
     jodRahaHai: "Adding...",
 
     fieldDetail: "Field Detail",
-    soilType: "Soil Type",
-    irrigation: "Irrigation",
-    sowingDate: "Sowing Date",
-    notSet: "Not set",
     koiPhotoNahi: "No photo",
+    khetKiDiary: "Field Diary",
+    nayaUpdateBtn: "New Update",
+    nayaUpdateHeading: "Add New Update",
+    photoLabel: "Photo",
+    noteLabel: "Note (optional)",
+    notePlaceholder: "e.g. watered today, leaves look yellow...",
+    updateJodeinBtn: "Add Update",
+    photoZaroori: "Photo is required.",
+    updateNahiPaya: "Couldn't add update. Please check the backend.",
+    diaryEmpty: "No updates yet. Add the first one!",
+    diaryLoadFail: "Couldn't load diary.",
+    recentActivity: "Recent Diary Updates",
+    noRecentActivity: "No diary updates yet. Add the first update on any field!",
 
     appLanguageQuestion: "Which language would you like to use the app in?",
     languageDesc: "Choose your preferred language to get started. You can change this later.",
@@ -174,6 +198,14 @@ function getSavedLanguage() {
 
 function setSavedLanguage(lang) {
   localStorage.setItem("terralens_lang", lang);
+}
+
+function getSavedName() {
+  return localStorage.getItem("terralens_name") || "";
+}
+
+function setSavedName(name) {
+  localStorage.setItem("terralens_name", name);
 }
 
 function t(key) {

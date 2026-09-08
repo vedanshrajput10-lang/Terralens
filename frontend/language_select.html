@@ -19,7 +19,27 @@
             Choose your preferred language to get started. You can change this later.
         </p>
 </header>
-<main class="flex-1 flex flex-col gap-gutter relative z-10"><label class="relative cursor-pointer group">
+
+<!-- App Info Card -->
+<div class="bg-primary-container/40 rounded-xl p-stack-md mb-stack-md relative z-10 border border-primary/20">
+<h3 class="font-label-bold text-label-bold text-primary mb-2" data-i18n="appAboutTitle">TerraLens se kya kar sakte hain?</h3>
+<ul class="flex flex-col gap-1.5">
+<li class="font-body-md text-body-md text-on-surface-variant" data-i18n="appAboutFeature1">🌾 Apne saare khet ek jagah manage karein</li>
+<li class="font-body-md text-body-md text-on-surface-variant" data-i18n="appAboutFeature2">📸 Khet ki Diary — time-time pe photo aur note daalein</li>
+<li class="font-body-md text-body-md text-on-surface-variant" data-i18n="appAboutFeature3">🌦 Har update ke saath us din ka real weather</li>
+<li class="font-body-md text-body-md text-on-surface-variant" data-i18n="appAboutFeature4">🗣 Apni bhasha mein — Hindi, English ya Hindi+English</li>
+</ul>
+</div>
+
+<main class="flex-1 flex flex-col gap-gutter relative z-10">
+
+<!-- Name Input -->
+<div>
+<label class="block font-label-bold text-label-bold text-on-surface-variant mb-2" data-i18n="yourName">Aapka Naam</label>
+<input id="userName" type="text" data-i18n-placeholder="namePlaceholder" placeholder="apna naam likhein" class="w-full h-14 px-4 rounded-xl bg-surface-container-low border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary font-body-lg text-body-lg"/>
+</div>
+
+<label class="relative cursor-pointer group">
 <input checked="" class="peer sr-only" name="language_selection" type="radio" value="hinglish">
 <div class="w-full bg-surface-container-low rounded-xl p-stack-md flex items-center gap-stack-md transition-all duration-300 shadow-sm peer-checked:bg-primary-container peer-checked:shadow-md ring-0 peer-checked:ring-2 peer-checked:ring-primary active:scale-[0.98]">
 <div class="w-12 h-12 rounded-full bg-surface flex items-center justify-center shadow-sm flex-shrink-0 text-[24px]">
@@ -46,10 +66,10 @@
                     🇮🇳
                 </div>
 <div class="flex-1">
-<h2 class="font-headline-md text-headline-md text-on-surface peer-checked:text-on-primary-container mb-1 group-focus-within:text-on-primary-container">
+<h2 class="font-headline-md text-headline-md text-on-surface peer-checked:text-on-primary-container mb-1 group-focus-within:text-on-primary-container" data-i18n="hindi">
                         हिंदी
                     </h2>
-<p class="font-body-md text-body-md text-on-surface-variant peer-checked:text-on-primary-container/80 group-focus-within:text-on-primary-container/80">
+<p class="font-body-md text-body-md text-on-surface-variant peer-checked:text-on-primary-container/80 group-focus-within:text-on-primary-container/80" data-i18n="hindiSub">
                         सरल हिंदी में
                     </p>
 </div>
@@ -66,10 +86,10 @@
                     🇬🇧
                 </div>
 <div class="flex-1">
-<h2 class="font-headline-md text-headline-md text-on-surface peer-checked:text-on-primary-container mb-1 group-focus-within:text-on-primary-container">
+<h2 class="font-headline-md text-headline-md text-on-surface peer-checked:text-on-primary-container mb-1 group-focus-within:text-on-primary-container" data-i18n="english">
                         English
                     </h2>
-<p class="font-body-md text-body-md text-on-surface-variant peer-checked:text-on-primary-container/80 group-focus-within:text-on-primary-container/80">
+<p class="font-body-md text-body-md text-on-surface-variant peer-checked:text-on-primary-container/80 group-focus-within:text-on-primary-container/80" data-i18n="englishSub">
                         Simple English
                     </p>
 </div>
@@ -80,6 +100,7 @@
 </label>
 </main>
 <footer class="mt-stack-lg relative z-10 w-full pt-stack-sm">
+<p id="nameErrorMsg" class="text-error text-sm mb-2 hidden">Naam likhna zaroori hai.</p>
 <button class="w-full bg-primary text-on-primary font-label-bold text-label-bold h-[56px] rounded-full flex items-center justify-center gap-2 shadow-md hover:bg-primary/90 active:bg-primary-container active:text-on-primary-container transition-colors duration-200" id="continueBtn">
 <span data-i18n="aageBadhein">Aage badhein</span>
             <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
@@ -88,52 +109,62 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        applyTranslations();
+const API_BASE = "http://127.0.0.1:8000";
 
-        const radioInputs = document.querySelectorAll('input[name="language_selection"]');
-        const continueBtn = document.getElementById('continueBtn');
+document.addEventListener('DOMContentLoaded', () => {
+    // Load any previously saved name
+    const nameInput = document.getElementById('userName');
+    nameInput.value = getSavedName();
 
-        updateButtonState();
+    applyTranslations();
 
-        radioInputs.forEach(input => {
-            input.addEventListener('change', updateButtonState);
-        });
+    const radioInputs = document.querySelectorAll('input[name="language_selection"]');
+    const continueBtn = document.getElementById('continueBtn');
+    const nameErrorMsg = document.getElementById('nameErrorMsg');
 
-        function updateButtonState() {
-            let isSelected = false;
-            radioInputs.forEach(input => {
-                if (input.checked) isSelected = true;
-            });
-
-            if (isSelected) {
-                continueBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-            } else {
-                 continueBtn.classList.add('opacity-50', 'cursor-not-allowed');
-            }
-        }
-
-        continueBtn.addEventListener('click', (e) => {
-            if(continueBtn.classList.contains('cursor-not-allowed')) return;
-
-            const btn = e.currentTarget;
-            btn.style.transform = 'scale(0.96)';
-            setTimeout(() => {
-                btn.style.transform = 'scale(1)';
-            }, 100);
-
+    // Live language switch: as soon as a language is picked, every label on
+    // this page (including the continue button) updates immediately.
+    radioInputs.forEach(input => {
+        input.addEventListener('change', () => {
             const selected = document.querySelector('input[name="language_selection"]:checked');
-            const langValue = selected ? selected.value : 'hinglish';
-            setSavedLanguage(langValue);
-
-            const originalHtml = btn.innerHTML;
-            btn.innerHTML = `<span class="material-symbols-outlined animate-spin">progress_activity</span> Setup shuru ho raha hai...`;
-
-            setTimeout(() => {
-                window.location.href = 'stitch_home.html';
-            }, 1500);
+            setSavedLanguage(selected.value);
+            applyTranslations();
         });
     });
+
+    continueBtn.addEventListener('click', (e) => {
+        const name = nameInput.value.trim();
+        if (!name) {
+            nameErrorMsg.classList.remove('hidden');
+            nameInput.focus();
+            return;
+        }
+        nameErrorMsg.classList.add('hidden');
+
+        const btn = e.currentTarget;
+        btn.style.transform = 'scale(0.96)';
+        setTimeout(() => { btn.style.transform = 'scale(1)'; }, 100);
+
+        const selected = document.querySelector('input[name="language_selection"]:checked');
+        const langValue = selected ? selected.value : 'hinglish';
+        setSavedLanguage(langValue);
+        setSavedName(name);
+
+        // Try saving to backend too (won't block navigation if backend isn't ready yet)
+        fetch(`${API_BASE}/user`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, language: langValue })
+        }).catch(() => {});
+
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = `<span class="material-symbols-outlined animate-spin">progress_activity</span> ${t("aageBadhein")}...`;
+
+        setTimeout(() => {
+            window.location.href = 'stitch_home.html';
+        }, 1000);
+    });
+});
 </script></main>
 
 </body></html>
