@@ -29,7 +29,7 @@
     </div>
   </div>
 
-  <div class="grid grid-cols-2 gap-3">
+    <div class="grid grid-cols-2 gap-3">
     <div>
       <label class="block text-sm font-semibold text-on-surface-variant mb-1">Latitude</label>
       <input type="number" step="any" id="latitude" placeholder="26.85" class="w-full h-14 px-4 rounded-xl bg-surface-container-low border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary"/>
@@ -39,6 +39,12 @@
       <input type="number" step="any" id="longitude" placeholder="80.95" class="w-full h-14 px-4 rounded-xl bg-surface-container-low border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary"/>
     </div>
   </div>
+
+  <button type="button" id="gpsBtn" class="w-full h-12 rounded-xl border border-outline-variant text-primary font-semibold flex items-center justify-center gap-2">
+    <span class="material-symbols-outlined text-lg">my_location</span>
+    <span id="gpsBtnText">Auto-fill Location (GPS)</span>
+  </button>
+  <p id="gpsError" class="text-error text-sm hidden"></p>
 
   <div>
     <label class="block text-sm font-semibold text-on-surface-variant mb-1">Area (acres) *</label>
@@ -71,6 +77,34 @@
 
 <script>
 const API_BASE = "https://terralens-vvqc.onrender.com";
+
+document.getElementById("gpsBtn").addEventListener("click", () => {
+  const btnText = document.getElementById("gpsBtnText");
+  const gpsError = document.getElementById("gpsError");
+  gpsError.classList.add("hidden");
+
+  if (!navigator.geolocation) {
+    gpsError.textContent = "Is browser mein GPS support nahi hai.";
+    gpsError.classList.remove("hidden");
+    return;
+  }
+
+  btnText.textContent = "Location dhoondh rahe hain...";
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      document.getElementById("latitude").value = position.coords.latitude.toFixed(6);
+      document.getElementById("longitude").value = position.coords.longitude.toFixed(6);
+      btnText.textContent = "Location mil gayi ✓";
+      setTimeout(() => { btnText.textContent = "Auto-fill Location (GPS)"; }, 2000);
+    },
+    (error) => {
+      gpsError.textContent = "Location nahi mil payi. Permission allow karein aur dobara try karein.";
+      gpsError.classList.remove("hidden");
+      btnText.textContent = "Auto-fill Location (GPS)";
+    }
+  );
+});
 
 document.getElementById("photo").addEventListener("change", (e) => {
   const file = e.target.files[0];

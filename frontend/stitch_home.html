@@ -122,7 +122,7 @@ async function loadFieldsSummary() {
     const totalAcres = fields.reduce((sum, f) => sum + (f.area || 0), 0);
     el.textContent = `${fields.length} ${t("fields")} • ${totalAcres.toFixed(1)} Acres`;
   } catch (err) {
-    el.textContent = "Fields load nahi hue";
+    el.textContent = "Data load nahi ho paya";
     console.error(err);
   }
 }
