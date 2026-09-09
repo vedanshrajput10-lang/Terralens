@@ -48,6 +48,7 @@ uvicorn app.main:app --reload
 
 API: http://127.0.0.1:8000
 Swagger docs: http://127.0.0.1:8000/docs
+Render live: https://terralens-1.onrender.com
 
 ### Frontend
 
