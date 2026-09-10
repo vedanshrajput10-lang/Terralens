@@ -208,6 +208,17 @@ function setSavedName(name) {
   localStorage.setItem("terralens_name", name);
 }
 
+// Har device/browser ko ek chhota, private, anonymous ID milta hai (ek baar generate hota hai, phir save reh jaata hai).
+// Isse har farmer ka data sirf unke apne device pe hi dikhta hai, dusron ka data mix nahi hota.
+function getUserId() {
+  let id = localStorage.getItem("terralens_user_id");
+  if (!id) {
+    id = (crypto.randomUUID ? crypto.randomUUID() : "id-" + Date.now() + "-" + Math.random().toString(16).slice(2));
+    localStorage.setItem("terralens_user_id", id);
+  }
+  return id;
+}
+
 function t(key) {
   const lang = getSavedLanguage();
   return (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) || TRANSLATIONS.hinglish[key] || key;
