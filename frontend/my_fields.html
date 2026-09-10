@@ -54,7 +54,7 @@ function updateLangBtnLabel() {
 async function loadFields() {
   const container = document.getElementById("fieldsContainer");
   try {
-    const res = await fetch(`${API_BASE}/fields`);
+    const res = await fetch(`${API_BASE}/fields?user_id=${getUserId()}`);
     const fields = await res.json();
 
     if (fields.length === 0) {
@@ -71,8 +71,13 @@ async function loadFields() {
         ? "block bg-surface-container rounded-xl p-6 shadow-md flex flex-col gap-4 relative overflow-hidden transform transition active:scale-[0.98]"
         : "block bg-surface-container-low rounded-xl p-6 shadow-sm flex flex-col gap-4 relative overflow-hidden transform transition active:scale-[0.98]";
 
+      const photoHtml = field.photo_url
+        ? `<img src="${field.photo_url}" class="w-full h-40 object-cover rounded-xl -mt-6 -mx-6 mb-2" style="width: calc(100% + 3rem);"/>`
+        : `<div class="w-full h-40 -mt-6 -mx-6 mb-2 bg-surface-container flex items-center justify-center text-on-surface-variant text-sm" style="width: calc(100% + 3rem);">${t("koiPhotoNahi")}</div>`;
+
       return `
         <a class="${cardClasses}" href="field_detail.html?id=${field.id}">
+          ${photoHtml}
           <div class="flex justify-between items-start">
             <div>
               <h2 class="font-headline-md text-headline-md text-on-surface">${field.name}</h2>
