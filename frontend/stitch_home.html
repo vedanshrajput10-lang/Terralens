@@ -69,7 +69,7 @@ function renderGreeting() {
 async function loadUserName() {
   // Try backend first (source of truth once /user endpoint exists), fall back to localStorage
   try {
-    const res = await fetch(`${API_BASE}/user`);
+    const res = await fetch(`${API_BASE}/user?user_id=${getUserId()}`);
     if (res.ok) {
       const user = await res.json();
       if (user && user.name) {
@@ -85,7 +85,7 @@ async function loadUserName() {
 async function loadRecentActivity() {
   const container = document.getElementById("recentActivityContainer");
   try {
-    const res = await fetch(`${API_BASE}/updates/recent?limit=3`);
+    const res = await fetch(`${API_BASE}/updates/recent?limit=3&user_id=${getUserId()}`);
     if (!res.ok) throw new Error("Failed");
     const updates = await res.json();
 
@@ -117,7 +117,7 @@ async function loadRecentActivity() {
 async function loadFieldsSummary() {
   const el = document.getElementById("fieldsSummary");
   try {
-    const res = await fetch(`${API_BASE}/fields`);
+    const res = await fetch(`${API_BASE}/fields?user_id=${getUserId()}`);
     const fields = await res.json();
     const totalAcres = fields.reduce((sum, f) => sum + (f.area || 0), 0);
     el.textContent = `${fields.length} ${t("fields")} • ${totalAcres.toFixed(1)} Acres`;
