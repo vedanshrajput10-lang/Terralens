@@ -5,3 +5,4 @@ requests
 pymongo
 dnspython
 python-dotenv
+cloudinary
