@@ -222,6 +222,18 @@ def create_field_update(field_id: str, request: Request, file: UploadFile = File
     return update_doc
 
 
+@app.delete("/fields/{field_id}/updates/{update_id}")
+def delete_field_update(field_id: str, update_id: str):
+    db = get_database()
+    if db is None:
+        raise HTTPException(status_code=500, detail="Database not available")
+
+    result = db["field_updates"].delete_one({"id": update_id, "field_id": field_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Update not found")
+    return {"status": "deleted", "id": update_id}
+
+
 @app.get("/updates/recent")
 def recent_updates(limit: int = 5, user_id: Optional[str] = None):
     db = get_database()
