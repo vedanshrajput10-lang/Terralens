@@ -2,7 +2,7 @@
 <script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary": "#012d1d", "on-primary": "#ffffff", "surface": "#fcf9f8", "on-surface": "#1b1c1c", "on-surface-variant": "#414844", "surface-container-low": "#f6f3f2", "surface-container": "#f0eded", "outline-variant": "#c1c8c2", "error": "#ba1a1a" } } } };</script><style>
     body { min-height: max(884px, 100dvh); }
   </style>
-</head><body class="bg-surface font-sans text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl pt-safe shadow-sm"><div class="h-16 px-5 flex items-center gap-3"><button onclick="history.back()" class="w-12 h-12 flex items-center justify-center text-on-surface-variant"><span class="material-symbols-outlined">arrow_back</span></button><h1 class="text-xl font-bold text-primary">Naya Khet Jodein</h1></div></header>
+<script src="translations.js"></script></head><body class="bg-surface font-sans text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl pt-safe shadow-sm"><div class="h-16 px-5 flex items-center gap-3"><button onclick="history.back()" class="w-12 h-12 flex items-center justify-center text-on-surface-variant"><span class="material-symbols-outlined">arrow_back</span></button><h1 class="text-xl font-bold text-primary">Naya Khet Jodein</h1></div></header>
 
 <main class="pt-20 pb-32 px-5 max-w-lg mx-auto">
 <form id="addFieldForm" class="flex flex-col gap-5">
@@ -132,7 +132,8 @@ document.getElementById("addFieldForm").addEventListener("submit", async (e) => 
     },
     area: parseFloat(document.getElementById("area").value),
     crop: document.getElementById("crop").value,
-    season: document.getElementById("season").value
+    season: document.getElementById("season").value,
+    user_id: getUserId()
   };
 
   submitBtn.disabled = true;
