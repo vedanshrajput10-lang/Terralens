@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, UploadFile, File, Form
+from fastapi import FastAPI, HTTPException, UploadFile, File, Form, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from typing import List, Optional
@@ -8,6 +8,8 @@ import os
 import shutil
 import uuid
 import requests
+import cloudinary
+import cloudinary.uploader
 
 from .config import APP_NAME
 from .db import get_database
@@ -25,6 +27,13 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+)
+
+# Cloudinary — permanent photo storage (Render ka local disk restart pe khaali ho jaata hai, isliye photos yahan rakhte hain)
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
 )
 
 UPLOAD_DIR = os.path.join(os.path.dirname(__file__), "..", "uploads")
@@ -78,12 +87,13 @@ def create_field(field_data: FieldCreate):
 
 
 @app.get("/fields", response_model=List[Field])
-def list_fields():
+def list_fields(user_id: Optional[str] = None):
     db = get_database()
     if db is None:
         raise HTTPException(status_code=500, detail="Database not available")
 
-    fields = list(db["fields"].find({}, {"_id": 0}))
+    query = {"user_id": user_id} if user_id else {}
+    fields = list(db["fields"].find(query, {"_id": 0}))
     return fields
 
 
@@ -112,7 +122,7 @@ def delete_field(field_id: str):
 
 
 @app.post("/fields/{field_id}/photo")
-def upload_field_photo(field_id: str, file: UploadFile = File(...)):
+def upload_field_photo(field_id: str, request: Request, file: UploadFile = File(...)):
     db = get_database()
     if db is None:
         raise HTTPException(status_code=500, detail="Database not available")
@@ -121,14 +131,9 @@ def upload_field_photo(field_id: str, file: UploadFile = File(...)):
     if field is None:
         raise HTTPException(status_code=404, detail="Field not found")
 
-    ext = os.path.splitext(file.filename)[1]
-    filename = f"{field_id}{ext}"
-    filepath = os.path.join(UPLOAD_DIR, filename)
+    result = cloudinary.uploader.upload(file.file, folder="terralens/fields", public_id=field_id, overwrite=True)
+    photo_url = result["secure_url"]
 
-    with open(filepath, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
-
-    photo_url = f"http://127.0.0.1:8000/uploads/{filename}"
     db["fields"].update_one({"id": field_id}, {"$set": {"photo_url": photo_url}})
 
     return {"status": "uploaded", "photo_url": photo_url}
@@ -183,7 +188,7 @@ def list_field_updates(field_id: str):
 
 
 @app.post("/fields/{field_id}/updates")
-def create_field_update(field_id: str, file: UploadFile = File(...), note: Optional[str] = Form(None)):
+def create_field_update(field_id: str, request: Request, file: UploadFile = File(...), note: Optional[str] = Form(None)):
     db = get_database()
     if db is None:
         raise HTTPException(status_code=500, detail="Database not available")
@@ -193,14 +198,8 @@ def create_field_update(field_id: str, file: UploadFile = File(...), note: Optio
         raise HTTPException(status_code=404, detail="Field not found")
 
     update_id = str(uuid.uuid4())
-    ext = os.path.splitext(file.filename)[1] or ".jpg"
-    filename = f"update_{update_id}{ext}"
-    filepath = os.path.join(UPLOAD_DIR, filename)
-
-    with open(filepath, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
-
-    photo_url = f"http://127.0.0.1:8000/uploads/{filename}"
+    result = cloudinary.uploader.upload(file.file, folder="terralens/diary", public_id=update_id, overwrite=True)
+    photo_url = result["secure_url"]
 
     # Field's saved location se real weather uthao (Open-Meteo)
     weather_temp, weather_desc = None, None
@@ -212,6 +211,7 @@ def create_field_update(field_id: str, file: UploadFile = File(...), note: Optio
     update_doc = {
         "id": update_id,
         "field_id": field_id,
+        "user_id": field.get("user_id"),
         "photo_url": photo_url,
         "note": note,
         "weather_temp": weather_temp,
@@ -223,13 +223,14 @@ def create_field_update(field_id: str, file: UploadFile = File(...), note: Optio
 
 
 @app.get("/updates/recent")
-def recent_updates(limit: int = 5):
+def recent_updates(limit: int = 5, user_id: Optional[str] = None):
     db = get_database()
     if db is None:
         raise HTTPException(status_code=500, detail="Database not available")
 
+    query = {"user_id": user_id} if user_id else {}
     updates = list(
-        db["field_updates"].find({}, {"_id": 0}).sort("created_at", -1).limit(limit)
+        db["field_updates"].find(query, {"_id": 0}).sort("created_at", -1).limit(limit)
     )
     for u in updates:
         field = db["fields"].find_one({"id": u.get("field_id")}, {"_id": 0, "name": 1})
@@ -242,15 +243,17 @@ def recent_updates(limit: int = 5):
 class UserProfile(BaseModel):
     name: str
     language: str
+    user_id: Optional[str] = None
 
 
 @app.get("/user")
-def get_user():
+def get_user(user_id: Optional[str] = None):
     db = get_database()
     if db is None:
         raise HTTPException(status_code=500, detail="Database not available")
 
-    user = db["user"].find_one({"id": "singleton"}, {"_id": 0})
+    key = user_id or "singleton"
+    user = db["user"].find_one({"id": key}, {"_id": 0})
     if user is None:
         raise HTTPException(status_code=404, detail="No user saved yet")
     return user
@@ -262,9 +265,10 @@ def save_user(user: UserProfile):
     if db is None:
         raise HTTPException(status_code=500, detail="Database not available")
 
+    key = user.user_id or "singleton"
     db["user"].update_one(
-        {"id": "singleton"},
-        {"$set": {"id": "singleton", "name": user.name, "language": user.language}},
+        {"id": key},
+        {"$set": {"id": key, "name": user.name, "language": user.language}},
         upsert=True,
     )
     return {"name": user.name, "language": user.language}
