@@ -51,6 +51,24 @@ function updateLangBtnLabel() {
   document.getElementById("langBtnLabel").textContent = labels[getSavedLanguage()] || "Hinglish";
 }
 
+async function deleteField(fieldId, event) {
+  event.preventDefault();
+  event.stopPropagation();
+
+  if (!confirm("Kya aap is khet ko delete karna chahte hain? Ye wapas nahi hoga.")) {
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API_BASE}/fields/${fieldId}`, { method: "DELETE" });
+    if (!res.ok) throw new Error("Delete failed");
+    loadFields();
+  } catch (err) {
+    alert("Delete nahi ho paya. Dobara try karein.");
+    console.error(err);
+  }
+}
+
 async function loadFields() {
   const container = document.getElementById("fieldsContainer");
   try {
@@ -63,13 +81,12 @@ async function loadFields() {
     }
 
     container.innerHTML = fields.map(field => {
-      const health = field.crop_health || "Unknown";
-      const risk = field.risk_level || "Unknown";
-      const isHighlighted = risk === "Medium" || risk === "High";
+      const village = field.location && field.location.village ? field.location.village : "-";
+      const district = field.location && field.location.district ? field.location.district : "-";
+      const soilType = field.soil_type || "-";
+      const sowingDate = field.sowing_date ? new Date(field.sowing_date).toLocaleDateString() : "-";
 
-      const cardClasses = isHighlighted
-        ? "block bg-surface-container rounded-xl p-6 shadow-md flex flex-col gap-4 relative overflow-hidden transform transition active:scale-[0.98]"
-        : "block bg-surface-container-low rounded-xl p-6 shadow-sm flex flex-col gap-4 relative overflow-hidden transform transition active:scale-[0.98]";
+      const cardClasses = "block bg-surface-container-low rounded-xl p-6 shadow-sm flex flex-col gap-4 relative overflow-hidden transform transition active:scale-[0.98]";
 
       const photoHtml = field.photo_url
         ? `<img src="${field.photo_url}" class="w-full h-40 object-cover rounded-xl -mt-6 -mx-6 mb-2" style="width: calc(100% + 3rem);"/>`
@@ -77,6 +94,9 @@ async function loadFields() {
 
       return `
         <a class="${cardClasses}" href="field_detail.html?id=${field.id}">
+          <button onclick="deleteField('${field.id}', event)" class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-surface/90 flex items-center justify-center text-error shadow-md hover:bg-error hover:text-on-error transition-colors">
+            <span class="material-symbols-outlined text-[18px]">delete</span>
+          </button>
           ${photoHtml}
           <div class="flex justify-between items-start">
             <div>
@@ -90,15 +110,15 @@ async function loadFields() {
           </div>
           <div class="grid grid-cols-2 gap-4 mt-2">
             <div class="bg-surface rounded-lg p-3">
-              <p class="font-label-bold text-label-bold text-on-surface-variant mb-1">Health</p>
+              <p class="font-label-bold text-label-bold text-on-surface-variant mb-1">Village / District</p>
               <div class="flex items-center gap-2">
-                <span class="font-body-md text-body-md text-on-surface">${health}</span>
+                <span class="font-body-md text-body-md text-on-surface">${village}, ${district}</span>
               </div>
             </div>
             <div class="bg-surface rounded-lg p-3">
-              <p class="font-label-bold text-label-bold text-on-surface-variant mb-1">Risk</p>
+              <p class="font-label-bold text-label-bold text-on-surface-variant mb-1">Soil / Sowing</p>
               <div class="flex items-center gap-2">
-                <span class="font-body-md text-body-md text-on-surface">${risk}</span>
+                <span class="font-body-md text-body-md text-on-surface">${soilType} · ${sowingDate}</span>
               </div>
             </div>
           </div>
