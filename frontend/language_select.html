@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch(`${API_BASE}/user`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, language: langValue })
+            body: JSON.stringify({ name, language: langValue, user_id: getUserId() })
         }).catch(() => {});
 
         const originalHtml = btn.innerHTML;
