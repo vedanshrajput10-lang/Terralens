@@ -82,6 +82,22 @@ async function loadUserName() {
   renderGreeting();
 }
 
+async function deleteRecentUpdate(fieldId, updateId, event) {
+  event.preventDefault();
+  event.stopPropagation();
+
+  if (!confirm("Kya aap is diary entry ko delete karna chahte hain?")) return;
+
+  try {
+    const res = await fetch(`${API_BASE}/fields/${fieldId}/updates/${updateId}`, { method: "DELETE" });
+    if (!res.ok) throw new Error("Delete failed");
+    loadRecentActivity();
+  } catch (err) {
+    alert("Delete nahi ho paya. Dobara try karein.");
+    console.error(err);
+  }
+}
+
 async function loadRecentActivity() {
   const container = document.getElementById("recentActivityContainer");
   try {
@@ -104,6 +120,9 @@ async function loadRecentActivity() {
             <p class="font-label-bold text-label-bold text-on-surface truncate">${u.field_name || ""}</p>
             <p class="text-xs text-on-surface-variant">📅 ${dateStr}${weatherTag}</p>
           </div>
+          <button onclick="deleteRecentUpdate('${u.field_id}', '${u.id}', event)" class="w-9 h-9 flex-shrink-0 rounded-full flex items-center justify-center text-error active:scale-95 transition-transform">
+            <span class="material-symbols-outlined text-[20px]">delete</span>
+          </button>
           <span class="material-symbols-outlined text-on-surface-variant text-[20px]">chevron_right</span>
         </a>
       `;
