@@ -71,6 +71,9 @@ class FieldCreate(BaseModel):
     crop: str
     season: str
 
+    # Har device/farmer ko private rakhne ke liye — frontend se automatically bhejta hai
+    user_id: Optional[str] = None
+
     soil_type: Optional[str] = None
     irrigation_method: Optional[str] = None
     sowing_date: Optional[datetime] = None
