@@ -50,6 +50,16 @@ const TRANSLATIONS = {
     gpsFailed: "Location nahi mil payi. Permission allow karein aur dobara try karein.",
     khetAddNahiHoPaya: "Khet add nahi ho paya. Backend chal raha hai check karein.",
 
+    soilType: "Mitti ka Prakar",
+    selectSoilType: "Mitti chunein",
+    soilBlack: "Kaali mitti (Black)",
+    soilSandy: "Balui mitti (Sandy)",
+    soilClay: "Chikni mitti (Clay)",
+    soilLoamy: "Dumat mitti (Loamy)",
+    soilRed: "Laal mitti (Red)",
+    soilAlluvial: "Jalodh mitti (Alluvial)",
+    soilUnknown: "Pata nahi",
+
     fieldDetail: "Field Detail",
     koiPhotoNahi: "Koi photo nahi",
     khetKiDiary: "Khet ki Diary",
@@ -127,6 +137,16 @@ const TRANSLATIONS = {
     gpsNotSupported: "इस ब्राउज़र में GPS सपोर्ट नहीं है।",
     gpsFailed: "लोकेशन नहीं मिल पाई। परमिशन दें और दोबारा कोशिश करें।",
     khetAddNahiHoPaya: "खेत जोड़ा नहीं जा सका। बैकएंड चेक करें।",
+
+    soilType: "मिट्टी का प्रकार",
+    selectSoilType: "मिट्टी चुनें",
+    soilBlack: "काली मिट्टी",
+    soilSandy: "बलुई मिट्टी",
+    soilClay: "चिकनी मिट्टी",
+    soilLoamy: "दोमट मिट्टी",
+    soilRed: "लाल मिट्टी",
+    soilAlluvial: "जलोढ़ मिट्टी",
+    soilUnknown: "पता नहीं",
 
     fieldDetail: "खेत का विवरण",
     koiPhotoNahi: "कोई फोटो नहीं",
@@ -206,6 +226,16 @@ const TRANSLATIONS = {
     gpsFailed: "Couldn't get location. Please allow permission and try again.",
     khetAddNahiHoPaya: "Couldn't add field. Please check the backend.",
 
+    soilType: "Soil Type",
+    selectSoilType: "Select soil type",
+    soilBlack: "Black soil",
+    soilSandy: "Sandy soil",
+    soilClay: "Clay soil",
+    soilLoamy: "Loamy soil",
+    soilRed: "Red soil",
+    soilAlluvial: "Alluvial soil",
+    soilUnknown: "Not sure",
+
     fieldDetail: "Field Detail",
     koiPhotoNahi: "No photo",
     khetKiDiary: "Field Diary",
@@ -250,8 +280,6 @@ function setSavedName(name) {
   localStorage.setItem("terralens_name", name);
 }
 
-// Har device/browser ko ek chhota, private, anonymous ID milta hai (ek baar generate hota hai, phir save reh jaata hai).
-// Isse har farmer ka data sirf unke apne device pe hi dikhta hai, dusron ka data mix nahi hota.
 function getUserId() {
   let id = localStorage.getItem("terralens_user_id");
   if (!id) {
