@@ -36,6 +36,20 @@ const TRANSLATIONS = {
     khetJodeinBtn: "Khet Jodein",
     jodRahaHai: "Jod raha hai...",
 
+    fieldNamePlaceholder: "e.g. Field 05",
+    villagePlaceholder: "Village",
+    districtPlaceholder: "District",
+    latitudePlaceholder: "26.85",
+    longitudePlaceholder: "80.95",
+    areaPlaceholder: "e.g. 2.5",
+    cropPlaceholder: "e.g. Rice, Wheat, Cotton",
+    gpsAutoFill: "Auto-fill Location (GPS)",
+    gpsSearching: "Location dhoondh rahe hain...",
+    gpsFound: "Location mil gayi ✓",
+    gpsNotSupported: "Is browser mein GPS support nahi hai.",
+    gpsFailed: "Location nahi mil payi. Permission allow karein aur dobara try karein.",
+    khetAddNahiHoPaya: "Khet add nahi ho paya. Backend chal raha hai check karein.",
+
     fieldDetail: "Field Detail",
     koiPhotoNahi: "Koi photo nahi",
     khetKiDiary: "Khet ki Diary",
@@ -99,6 +113,20 @@ const TRANSLATIONS = {
     selectSeason: "मौसम चुनें",
     khetJodeinBtn: "खेत जोड़ें",
     jodRahaHai: "जोड़ा जा रहा है...",
+
+    fieldNamePlaceholder: "जैसे: खेत 05",
+    villagePlaceholder: "गांव",
+    districtPlaceholder: "जिला",
+    latitudePlaceholder: "26.85",
+    longitudePlaceholder: "80.95",
+    areaPlaceholder: "जैसे: 2.5",
+    cropPlaceholder: "जैसे: चावल, गेहूं, कपास",
+    gpsAutoFill: "लोकेशन अपने आप भरें (GPS)",
+    gpsSearching: "लोकेशन ढूंढ रहे हैं...",
+    gpsFound: "लोकेशन मिल गई ✓",
+    gpsNotSupported: "इस ब्राउज़र में GPS सपोर्ट नहीं है।",
+    gpsFailed: "लोकेशन नहीं मिल पाई। परमिशन दें और दोबारा कोशिश करें।",
+    khetAddNahiHoPaya: "खेत जोड़ा नहीं जा सका। बैकएंड चेक करें।",
 
     fieldDetail: "खेत का विवरण",
     koiPhotoNahi: "कोई फोटो नहीं",
@@ -164,73 +192,21 @@ const TRANSLATIONS = {
     khetJodeinBtn: "Add Field",
     jodRahaHai: "Adding...",
 
+    fieldNamePlaceholder: "e.g. Field 05",
+    villagePlaceholder: "Village",
+    districtPlaceholder: "District",
+    latitudePlaceholder: "26.85",
+    longitudePlaceholder: "80.95",
+    areaPlaceholder: "e.g. 2.5",
+    cropPlaceholder: "e.g. Rice, Wheat, Cotton",
+    gpsAutoFill: "Auto-fill Location (GPS)",
+    gpsSearching: "Finding location...",
+    gpsFound: "Location found ✓",
+    gpsNotSupported: "GPS is not supported in this browser.",
+    gpsFailed: "Couldn't get location. Please allow permission and try again.",
+    khetAddNahiHoPaya: "Couldn't add field. Please check the backend.",
+
     fieldDetail: "Field Detail",
     koiPhotoNahi: "No photo",
     khetKiDiary: "Field Diary",
     nayaUpdateBtn: "New Update",
-    nayaUpdateHeading: "Add New Update",
-    photoLabel: "Photo",
-    noteLabel: "Note (optional)",
-    notePlaceholder: "e.g. watered today, leaves look yellow...",
-    updateJodeinBtn: "Add Update",
-    photoZaroori: "Photo is required.",
-    updateNahiPaya: "Couldn't add update. Please check the backend.",
-    diaryEmpty: "No updates yet. Add the first one!",
-    diaryLoadFail: "Couldn't load diary.",
-    recentActivity: "Recent Diary Updates",
-    noRecentActivity: "No diary updates yet. Add the first update on any field!",
-
-    appLanguageQuestion: "Which language would you like to use the app in?",
-    languageDesc: "Choose your preferred language to get started. You can change this later.",
-    hindiEnglish: "Hindi + English",
-    hindiEnglishSub: "In Hindi + English",
-    hindi: "Hindi",
-    hindiSub: "In simple Hindi",
-    english: "English",
-    englishSub: "Simple English",
-    aageBadhein: "Continue"
-  }
-};
-
-function getSavedLanguage() {
-  return localStorage.getItem("terralens_lang") || "hinglish";
-}
-
-function setSavedLanguage(lang) {
-  localStorage.setItem("terralens_lang", lang);
-}
-
-function getSavedName() {
-  return localStorage.getItem("terralens_name") || "";
-}
-
-function setSavedName(name) {
-  localStorage.setItem("terralens_name", name);
-}
-
-// Har device/browser ko ek chhota, private, anonymous ID milta hai (ek baar generate hota hai, phir save reh jaata hai).
-// Isse har farmer ka data sirf unke apne device pe hi dikhta hai, dusron ka data mix nahi hota.
-function getUserId() {
-  let id = localStorage.getItem("terralens_user_id");
-  if (!id) {
-    id = (crypto.randomUUID ? crypto.randomUUID() : "id-" + Date.now() + "-" + Math.random().toString(16).slice(2));
-    localStorage.setItem("terralens_user_id", id);
-  }
-  return id;
-}
-
-function t(key) {
-  const lang = getSavedLanguage();
-  return (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) || TRANSLATIONS.hinglish[key] || key;
-}
-
-function applyTranslations() {
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.getAttribute("data-i18n");
-    el.textContent = t(key);
-  });
-  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-    const key = el.getAttribute("data-i18n-placeholder");
-    el.placeholder = t(key);
-  });
-}
