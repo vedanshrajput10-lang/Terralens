@@ -82,6 +82,20 @@
     </select>
   </div>
 
+  <div>
+    <label class="block text-sm font-semibold text-on-surface-variant mb-1" data-i18n="soilType">Soil Type</label>
+    <select id="soilType" class="w-full h-14 px-4 rounded-xl bg-surface-container-low border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary">
+      <option value="" data-i18n="selectSoilType">Select soil type</option>
+      <option value="black" data-i18n="soilBlack">Black soil</option>
+      <option value="sandy" data-i18n="soilSandy">Sandy soil</option>
+      <option value="clay" data-i18n="soilClay">Clay soil</option>
+      <option value="loamy" data-i18n="soilLoamy">Loamy soil</option>
+      <option value="red" data-i18n="soilRed">Red soil</option>
+      <option value="alluvial" data-i18n="soilAlluvial">Alluvial soil</option>
+      <option value="unknown" data-i18n="soilUnknown">Not sure</option>
+    </select>
+  </div>
+
   <p id="errorMsg" class="text-error text-sm hidden"></p>
 
   <button type="submit" id="submitBtn" class="w-full h-14 mt-2 bg-primary text-on-primary rounded-full font-semibold shadow-md active:scale-95 transition-transform">
@@ -173,6 +187,7 @@ document.getElementById("addFieldForm").addEventListener("submit", async (e) => 
     area: parseFloat(document.getElementById("area").value),
     crop: document.getElementById("crop").value,
     season: document.getElementById("season").value,
+    soil_type: document.getElementById("soilType").value || null,
     user_id: getUserId()
   };
 
@@ -201,7 +216,6 @@ document.getElementById("addFieldForm").addEventListener("submit", async (e) => 
     return;
   }
 
-  // Field is saved at this point — photo upload is a separate, non-blocking step
   const photoFile = document.getElementById("photo").files[0];
   if (photoFile) {
     try {
