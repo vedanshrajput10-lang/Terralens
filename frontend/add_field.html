@@ -2,7 +2,23 @@
 <script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary": "#012d1d", "on-primary": "#ffffff", "surface": "#fcf9f8", "on-surface": "#1b1c1c", "on-surface-variant": "#414844", "surface-container-low": "#f6f3f2", "surface-container": "#f0eded", "outline-variant": "#c1c8c2", "error": "#ba1a1a" } } } };</script><style>
     body { min-height: max(884px, 100dvh); }
   </style>
-<script src="translations.js"></script></head><body class="bg-surface font-sans text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl pt-safe shadow-sm"><div class="h-16 px-5 flex items-center gap-3"><button onclick="history.back()" class="w-12 h-12 flex items-center justify-center text-on-surface-variant"><span class="material-symbols-outlined">arrow_back</span></button><h1 class="text-xl font-bold text-primary" data-i18n="nayaKhetHeading">Naya Khet Jodein</h1></div></header>
+<script src="translations.js"></script></head><body class="bg-surface font-sans text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl pt-safe shadow-sm"><div class="h-16 px-5 flex items-center justify-between gap-3">
+  <div class="flex items-center gap-3">
+    <button onclick="history.back()" class="w-12 h-12 flex items-center justify-center text-on-surface-variant"><span class="material-symbols-outlined">arrow_back</span></button>
+    <h1 class="text-xl font-bold text-primary" data-i18n="nayaKhetHeading">Naya Khet Jodein</h1>
+  </div>
+  <div class="relative">
+    <button id="langBtn" onclick="toggleLangMenu()" class="flex items-center gap-1 px-3 h-10 rounded-full bg-surface-container-low text-on-surface-variant">
+      <span class="material-symbols-outlined text-[20px]">language</span>
+      <span class="text-sm font-semibold" id="langBtnLabel">Hinglish</span>
+    </button>
+    <div id="langMenu" class="hidden absolute right-0 mt-2 w-44 bg-surface rounded-xl shadow-lg border border-outline-variant/30 overflow-hidden z-50">
+      <button onclick="switchLang('hinglish')" class="w-full text-left px-4 py-3 hover:bg-surface-container-low text-sm">Hindi + English</button>
+      <button onclick="switchLang('hindi')" class="w-full text-left px-4 py-3 hover:bg-surface-container-low text-sm">हिंदी</button>
+      <button onclick="switchLang('english')" class="w-full text-left px-4 py-3 hover:bg-surface-container-low text-sm">English</button>
+    </div>
+  </div>
+</div></header>
 
 <main class="pt-20 pb-32 px-5 max-w-lg mx-auto">
 <form id="addFieldForm" class="flex flex-col gap-5">
@@ -69,4 +85,144 @@
   <p id="errorMsg" class="text-error text-sm hidden"></p>
 
   <button type="submit" id="submitBtn" class="w-full h-14 mt-2 bg-primary text-on-primary rounded-full font-semibold shadow-md active:scale-95 transition-transform">
-    <span
+    <span data-i18n="khetJodeinBtn">Khet Jodein</span>
+  </button>
+
+</form>
+</main>
+
+<script>
+const API_BASE = "https://terralens-vvqc.onrender.com";
+
+function toggleLangMenu() {
+  document.getElementById("langMenu").classList.toggle("hidden");
+}
+
+document.addEventListener("click", (e) => {
+  const menu = document.getElementById("langMenu");
+  const btn = document.getElementById("langBtn");
+  if (menu && !menu.classList.contains("hidden") && !menu.contains(e.target) && !btn.contains(e.target)) {
+    menu.classList.add("hidden");
+  }
+});
+
+function switchLang(lang) {
+  setSavedLanguage(lang);
+  applyTranslations();
+  updateLangBtnLabel();
+  document.getElementById("langMenu").classList.add("hidden");
+}
+
+function updateLangBtnLabel() {
+  const labels = { hinglish: "Hinglish", hindi: "हिंदी", english: "English" };
+  document.getElementById("langBtnLabel").textContent = labels[getSavedLanguage()] || "Hinglish";
+}
+
+document.getElementById("gpsBtn").addEventListener("click", () => {
+  const btnText = document.getElementById("gpsBtnText");
+  const gpsError = document.getElementById("gpsError");
+  gpsError.classList.add("hidden");
+
+  if (!navigator.geolocation) {
+    gpsError.textContent = t("gpsNotSupported");
+    gpsError.classList.remove("hidden");
+    return;
+  }
+
+  btnText.textContent = t("gpsSearching");
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      document.getElementById("latitude").value = position.coords.latitude.toFixed(6);
+      document.getElementById("longitude").value = position.coords.longitude.toFixed(6);
+      btnText.textContent = t("gpsFound");
+      setTimeout(() => { btnText.textContent = t("gpsAutoFill"); }, 2000);
+    },
+    (error) => {
+      gpsError.textContent = t("gpsFailed");
+      gpsError.classList.remove("hidden");
+      btnText.textContent = t("gpsAutoFill");
+    }
+  );
+});
+
+document.getElementById("photo").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  const preview = document.getElementById("photoPreview");
+  if (file) {
+    preview.src = URL.createObjectURL(file);
+    preview.classList.remove("hidden");
+  }
+});
+
+document.getElementById("addFieldForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const errorMsg = document.getElementById("errorMsg");
+  const submitBtn = document.getElementById("submitBtn");
+  errorMsg.classList.add("hidden");
+
+  const payload = {
+    name: document.getElementById("name").value,
+    location: {
+      latitude: parseFloat(document.getElementById("latitude").value) || null,
+      longitude: parseFloat(document.getElementById("longitude").value) || null,
+      village: document.getElementById("village").value || null,
+      district: document.getElementById("district").value || null
+    },
+    area: parseFloat(document.getElementById("area").value),
+    crop: document.getElementById("crop").value,
+    season: document.getElementById("season").value,
+    user_id: getUserId()
+  };
+
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = `<span>${t("jodRahaHai")}</span>`;
+
+  let newField;
+  try {
+    const res = await fetch(`${API_BASE}/fields`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) {
+      throw new Error("Server error");
+    }
+
+    newField = await res.json();
+  } catch (err) {
+    errorMsg.textContent = t("khetAddNahiHoPaya");
+    errorMsg.classList.remove("hidden");
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = `<span data-i18n="khetJodeinBtn">${t("khetJodeinBtn")}</span>`;
+    console.error(err);
+    return;
+  }
+
+  // Field is saved at this point — photo upload is a separate, non-blocking step
+  const photoFile = document.getElementById("photo").files[0];
+  if (photoFile) {
+    try {
+      const formData = new FormData();
+      formData.append("file", photoFile);
+      const photoRes = await fetch(`${API_BASE}/fields/${newField.id}/photo`, {
+        method: "POST",
+        body: formData
+      });
+      if (!photoRes.ok) {
+        console.error("Photo upload failed, but field was saved.");
+      }
+    } catch (err) {
+      console.error("Photo upload failed, but field was saved.", err);
+    }
+  }
+
+  window.location.href = "my_fields.html";
+});
+
+applyTranslations();
+updateLangBtnLabel();
+</script>
+</body></html>
