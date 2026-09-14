@@ -130,6 +130,4 @@ To add a new translatable string:
 
 ---
 
-## 📄 License
 
-This project is currently unlicensed — add a license of your choice before public release.
