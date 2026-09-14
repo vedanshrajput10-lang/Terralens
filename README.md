@@ -1,5 +1,7 @@
 # 🌾 TerraLens
 
+**Live Demo:** [https://terralens-1.onrender.com](https://terralens-1.onrender.com/language_select.html)
+
 **TerraLens** is a simple, farmer-friendly web app to help farmers manage their fields (*khet*) — track crops, seasons, soil type, and keep a photo diary of each field's progress over time, complete with real weather data.
 
 Built with a focus on accessibility: fully available in **Hindi, English, and Hinglish (Hindi + English)**, so farmers can use it in whichever language feels most natural.
@@ -14,7 +16,6 @@ Built with a focus on accessibility: fully available in **Hindi, English, and Hi
 - **Multi-language Support** — Full UI translation across Hindi, English, and Hinglish, switchable anytime via the language toggle
 - **Photo Storage** — Field and diary photos are uploaded to [Cloudinary](https://cloudinary.com/) for permanent, reliable hosting
 - **GPS Auto-fill** — One-tap location capture using the browser's Geolocation API
-- **Per-device Identity** — Each device gets a private, anonymous ID so a farmer's data stays their own, without requiring login/signup
 
 ---
 
